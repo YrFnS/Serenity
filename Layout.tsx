@@ -2,9 +2,8 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { Sparkles, Phone, Mail, Instagram, Facebook, MapPin, X, Menu } from "lucide-react";
+import { Sparkles, Phone, Mail, Instagram, Facebook, MapPin, X, Menu, ShoppingBag } from "lucide-react";
 import ChatBot from "@/components/ChatBot";
-import BookingModal from "@/components/BookingModal";
 import ReviewWidget from "@/components/ReviewWidget";
 import SeoSchema from "@/components/SeoSchema";
 import LoadingScreen from "@/components/LoadingScreen";
@@ -13,8 +12,6 @@ export default function Layout({ children, currentPageName }) {
   const location = useLocation();
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const [isBookingOpen, setIsBookingOpen] = React.useState(false);
-  const [initialService, setInitialService] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
@@ -25,23 +22,8 @@ export default function Layout({ children, currentPageName }) {
     const scrollHandler = (e) => handleScroll();
     window.addEventListener('scroll', scrollHandler, { passive: true });
 
-    const openBookingModal = () => {
-      setInitialService(null);
-      setIsBookingOpen(true);
-    };
-    
-    const openBookingModalWithService = (event) => {
-      setInitialService(event.detail.service);
-      setIsBookingOpen(true);
-    };
-
-    window.addEventListener('open-booking-modal', openBookingModal);
-    window.addEventListener('open-booking-modal-with-service', openBookingModalWithService);
-
     return () => {
       window.removeEventListener('scroll', scrollHandler);
-      window.removeEventListener('open-booking-modal', openBookingModal);
-      window.removeEventListener('open-booking-modal-with-service', openBookingModalWithService);
     };
   }, []);
 
@@ -49,33 +31,16 @@ export default function Layout({ children, currentPageName }) {
     setIsLoading(false);
   }, []);
 
-  const handleCloseBookingModal = React.useCallback(() => {
-    setIsBookingOpen(false);
-    setInitialService(null);
-  }, []);
-
   const navigationItems = React.useMemo(() => [
     { name: "Home", url: "/" },
-    { name: "Services", url: createPageUrl("Services") },
+    { name: "Shop", url: createPageUrl("Shop") },
     { name: "Gallery", url: createPageUrl("Gallery") },
     { name: "Our Team", url: createPageUrl("Team") },
-    { name: "Contact", url: createPageUrl("Contact") }
+    { name: "Contact", url: createPageUrl("Contact") },
+    { name: "Admin", url: createPageUrl("admin-products") }
   ], []);
 
-  // Add admin link only if URL contains admin parameter OR if accessing AdminBookings page
-  const isAdminMode = React.useMemo(() => {
-    return location.search.includes('admin=true') || 
-           location.pathname.includes('admin') ||
-           location.pathname.includes('AdminBookings') ||
-           currentPageName === 'AdminBookings';
-  }, [location.pathname, location.search, currentPageName]);
-
-  const adminNavigationItems = React.useMemo(() => [
-    ...navigationItems,
-    ...(isAdminMode ? [{ name: "Admin Bookings", url: createPageUrl("AdminBookings") }] : [])
-  ], [navigationItems, isAdminMode]);
-
-  const currentNavItems = isAdminMode ? adminNavigationItems : navigationItems;
+  const currentNavItems = navigationItems;
 
   if (isLoading) {
     return <LoadingScreen onLoadingComplete={handleLoadingComplete} />;
@@ -83,7 +48,7 @@ export default function Layout({ children, currentPageName }) {
 
   return (
     <div className="min-h-screen bg-[#F8F2EC] font-sans text-[length:var(--font-body)] leading-[1.618]">
-      <style jsx>{`
+      <style>{`
         :root {
           --obsidian: #0F0F0F;
           --shell: #F8F2EC;
@@ -191,27 +156,26 @@ export default function Layout({ children, currentPageName }) {
           }
         }
       `}</style>
-      
+
       <SeoSchema />
 
       {/* Navigation with improved accessibility */}
-      <nav 
-        className={`fixed top-0 left-0 right-0 z-50 nav-transition ${
-          isScrolled || isMenuOpen ? 'glass-nav py-4' : 'bg-transparent py-6'
-        }`}
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 nav-transition ${isScrolled || isMenuOpen ? 'glass-nav py-4' : 'bg-transparent py-6'
+          }`}
         role="navigation"
         aria-label="Main navigation"
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between pt-4">
             {/* Logo with improved accessibility */}
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="flex items-center gap-3 group transform transition-transform hover:scale-105"
-              aria-label="SERENITY Spa & Salon - Go to homepage"
+              aria-label="SERENITY Wellness Shop - Go to homepage"
             >
               <div className="relative">
-                <Sparkles 
+                <Sparkles
                   className={`w-8 h-8 sparkle-animation ${isScrolled || isMenuOpen ? 'text-[#C8A882]' : 'text-white text-shadow-dark'}`}
                   aria-hidden="true"
                 />
@@ -221,7 +185,7 @@ export default function Layout({ children, currentPageName }) {
                   SERENITY
                 </h1>
                 <p className={`text-xs text-center tracking-widest ${isScrolled || isMenuOpen ? 'text-[#C8A882]' : 'text-[#C8A882] text-shadow-dark'}`}>
-                  Spa & Salon
+                  Wellness Shop
                 </p>
               </div>
             </Link>
@@ -233,11 +197,10 @@ export default function Layout({ children, currentPageName }) {
                   key={item.name}
                   to={item.url}
                   role="menuitem"
-                  className={`text-sm font-medium transition-all duration-300 hover:text-[#C8A882] relative group ${
-                    location.pathname === item.url 
-                      ? 'text-[#C8A882]' 
-                      : (isScrolled || isMenuOpen ? 'text-[#0F0F0F]' : 'text-white text-shadow-dark')
-                  }`}
+                  className={`text-sm font-medium transition-all duration-300 hover:text-[#C8A882] relative group ${location.pathname === item.url
+                    ? 'text-[#C8A882]'
+                    : (isScrolled || isMenuOpen ? 'text-[#0F0F0F]' : 'text-white text-shadow-dark')
+                    }`}
                   aria-current={location.pathname === item.url ? 'page' : undefined}
                 >
                   {item.name}
@@ -248,18 +211,19 @@ export default function Layout({ children, currentPageName }) {
 
             {/* CTA Button with improved accessibility */}
             <div className="hidden lg:block">
-              <button 
-                onClick={() => window.dispatchEvent(new CustomEvent('open-booking-modal'))}
-                className="bg-[#C8A882] text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-[#0F0F0F] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2"
-                aria-label="Open booking appointment modal"
+              <Link
+                to="/shop"
+                className="bg-[#C8A882] text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-[#0F0F0F] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 flex items-center gap-2"
+                aria-label="Go to Shop"
               >
-                Book Appointment
-              </button>
+                <ShoppingBag className="w-4 h-4" />
+                Shop Now
+              </Link>
             </div>
 
             {/* Mobile Menu Button with improved accessibility */}
-            <button 
-              className={`lg:hidden p-2 z-50 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 rounded ${isScrolled || isMenuOpen ? 'text-[#0F0F0F]' : 'text-white text-shadow-dark'}`} 
+            <button
+              className={`lg:hidden p-2 z-50 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 rounded ${isScrolled || isMenuOpen ? 'text-[#0F0F0F]' : 'text-white text-shadow-dark'}`}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
@@ -270,10 +234,10 @@ export default function Layout({ children, currentPageName }) {
           </div>
         </div>
       </nav>
-      
+
       {/* Mobile Menu Overlay with improved accessibility */}
       {isMenuOpen && (
-        <div 
+        <div
           id="mobile-menu"
           className="fixed inset-0 bg-[#F8F2EC]/95 backdrop-blur-lg z-40 flex flex-col items-center justify-center lg:hidden"
           role="dialog"
@@ -286,24 +250,21 @@ export default function Layout({ children, currentPageName }) {
                 key={item.name}
                 to={item.url}
                 onClick={() => setIsMenuOpen(false)}
-                className={`text-2xl font-medium transition-all duration-300 hover:text-[#C8A882] focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 rounded px-2 py-1 ${
-                  location.pathname === item.url ? 'text-[#C8A882]' : 'text-[#0F0F0F]'
-                }`}
+                className={`text-2xl font-medium transition-all duration-300 hover:text-[#C8A882] focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 rounded px-2 py-1 ${location.pathname === item.url ? 'text-[#C8A882]' : 'text-[#0F0F0F]'
+                  }`}
                 aria-current={location.pathname === item.url ? 'page' : undefined}
               >
                 {item.name}
               </Link>
             ))}
-             <button 
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  window.dispatchEvent(new CustomEvent('open-booking-modal'));
-                }}
-                className="mt-8 bg-[#C8A882] text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-[#0F0F0F] transition-all duration-300 hover:scale-105 shadow-lg focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2"
-                aria-label="Open booking appointment modal"
-              >
-                Book Appointment
-              </button>
+            <Link
+              to="/shop"
+              onClick={() => setIsMenuOpen(false)}
+              className="mt-8 bg-[#C8A882] text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-[#0F0F0F] transition-all duration-300 hover:scale-105 shadow-lg focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2"
+              aria-label="Go to Shop"
+            >
+              Shop Now
+            </Link>
           </div>
         </div>
       )}
@@ -316,7 +277,7 @@ export default function Layout({ children, currentPageName }) {
       {/* Footer */}
       <footer className="bg-[#0F0F0F] text-white relative overflow-hidden" role="contentinfo">
         <div className="absolute inset-0 bg-gradient-to-r from-[#0F0F0F] via-[#1a1a1a] to-[#0F0F0F]" aria-hidden="true" />
-        
+
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-16">
           {/* Brand */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[clamp(1rem,2vw,2.5rem)] text-center md:text-left">
@@ -325,24 +286,23 @@ export default function Layout({ children, currentPageName }) {
                 <Sparkles className="w-8 h-8 text-[#C8A882] sparkle-animation" aria-hidden="true" />
                 <div>
                   <h2 className="font-serif text-2xl font-bold glow-text">SERENITY</h2>
-                  <p className="text-xs text-[#C8A882] tracking-widest">Luxury Spa & Salon</p>
+                  <p className="text-xs text-[#C8A882] tracking-widest">Wellness Shop</p>
                 </div>
               </div>
               <p className="text-sm leading-[1.618] text-gray-300 mb-6">
-                 's premier luxury wellness destination. Experience unparalleled service 
-                with our highly skilled professionals and state-of-the-art equipment.
+                Your premier destination for luxury wellness products. Discover our curated collection of organic body care and skincare essentials.
               </p>
               <div className="flex gap-4" role="list" aria-label="Social media links">
-                <a 
-                  href="#" 
+                <a
+                  href="#"
                   className="w-10 h-10 bg-[#C8A882] rounded-full flex items-center justify-center hover:bg-[#FF5C8D] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F]"
                   aria-label="Follow us on Instagram"
                   role="listitem"
                 >
                   <Instagram className="w-5 h-5" aria-hidden="true" />
                 </a>
-                <a 
-                  href="#" 
+                <a
+                  href="#"
                   className="w-10 h-10 bg-[#C8A882] rounded-full flex items-center justify-center hover:bg-[#FF5C8D] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F]"
                   aria-label="Follow us on Facebook"
                   role="listitem"
@@ -352,27 +312,27 @@ export default function Layout({ children, currentPageName }) {
               </div>
             </div>
 
-            {/* Services */}
+            {/* Categories */}
             <div className="mb-[1.2em]">
-              <h3 className="font-serif text-lg font-semibold mb-6 text-[#C8A882]">Premium Services</h3>
-              <nav aria-label="Services navigation">
+              <h3 className="font-serif text-lg font-semibold mb-6 text-[#C8A882]">Collections</h3>
+              <nav aria-label="Footer navigation">
                 <ul className="space-y-3 text-sm">
-                  <li><a href="#" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">Luxury Hair Styling</a></li>
-                  <li><a href="#" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">Advanced Skincare</a></li>
-                  <li><a href="#" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">Therapeutic Massage</a></li>
-                  <li><a href="#" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">Premium Nail Care</a></li>
-                  <li><a href="#" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">Wellness Treatments</a></li>
+                  <li><Link to="/shop?category=skincare" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">Skincare</Link></li>
+                  <li><Link to="/shop?category=bodycare" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">Body Care</Link></li>
+                  <li><Link to="/shop?category=haircare" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">Hair Care</Link></li>
+                  <li><Link to="/shop?category=healthcare" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">Health & Wellness</Link></li>
+                  <li><Link to="/shop?category=other" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">Accessories</Link></li>
                 </ul>
               </nav>
             </div>
 
             {/* Contact */}
             <div className="mb-[1.2em]">
-              <h3 className="font-serif text-lg font-semibold mb-6 text-[#C8A882]">Visit Our Sanctuary</h3>
+              <h3 className="font-serif text-lg font-semibold mb-6 text-[#C8A882]">Contact Us</h3>
               <address className="space-y-4 text-sm flex flex-col items-center md:items-start not-italic">
                 <div className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-[#C8A882] mt-0.5 flex-shrink-0" aria-hidden="true" />
-                  <span className="text-gray-300 leading-[1.618]">P-145, Sector A, Metropolitan Co-Operative Housing Society Limited,  ,   700105</span>
+                  <span className="text-gray-300 leading-[1.618]">P-145, Sector A, Metropolitan Co-Operative Housing Society Limited, 700105</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-[#C8A882]" aria-hidden="true" />
@@ -380,16 +340,16 @@ export default function Layout({ children, currentPageName }) {
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="w-5 h-5 text-[#C8A882]" aria-hidden="true" />
-                  <a href="mailto:info@serenitysalon.in" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">info@serenitysalon.in</a>
+                  <a href="mailto:info@serenityshop.in" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">info@serenityshop.in</a>
                 </div>
               </address>
             </div>
 
             {/* Newsletter */}
             <div className="mb-[1.2em]">
-              <h3 className="font-serif text-lg font-semibold mb-6 text-[#C8A882]">Luxury Updates</h3>
+              <h3 className="font-serif text-lg font-semibold mb-6 text-[#C8A882]">Stay Updated</h3>
               <p className="text-sm text-gray-300 mb-4 leading-[1.618]">
-                Subscribe for exclusive offers and premium wellness insights.
+                Subscribe for exclusive product launches and wellness tips.
               </p>
               <form className="flex flex-col sm:flex-row gap-2 max-w-sm mx-auto md:max-w-none" aria-label="Newsletter subscription">
                 <label htmlFor="newsletter-email" className="sr-only">Email address</label>
@@ -400,7 +360,7 @@ export default function Layout({ children, currentPageName }) {
                   className="flex-1 px-4 py-2 bg-white/10 border border-[#C8A882]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#C8A882] focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F]"
                   required
                 />
-                <button 
+                <button
                   type="submit"
                   className="px-4 py-2 bg-[#C8A882] text-white rounded-lg hover:bg-[#FF5C8D] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F]"
                 >
@@ -413,13 +373,13 @@ export default function Layout({ children, currentPageName }) {
           {/* Bottom Bar */}
           <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-400">
-              © 2024 Serenity Luxury Spa & Salon. All rights reserved.
+              © 2024 Serenity Wellness Shop. All rights reserved.
             </p>
-            
+
             <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
               <nav aria-label="Legal links">
                 <div className="flex gap-6 text-sm">
-                  <Link 
+                  <Link
                     to={createPageUrl("Sitemap")}
                     className="text-gray-400 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded"
                   >
@@ -429,7 +389,7 @@ export default function Layout({ children, currentPageName }) {
                   <a href="#" className="text-gray-400 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">Terms of Service</a>
                 </div>
               </nav>
-              
+
               {/* Digital Doctors Attribution */}
               <div className="text-xs text-gray-500">
                 Created by: <span className="text-[#C8A882] hover:text-white transition-colors duration-300">Digital Doctors</span>, +91-9555-9555-95
@@ -442,11 +402,6 @@ export default function Layout({ children, currentPageName }) {
       {/* Components */}
       <ChatBot />
       <ReviewWidget />
-      <BookingModal 
-        isOpen={isBookingOpen} 
-        onClose={handleCloseBookingModal}
-        initialService={initialService} 
-      />
     </div>
   );
 }

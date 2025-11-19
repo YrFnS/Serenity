@@ -10,13 +10,13 @@ const galleryImages = [
   },
   {
     src: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/831601306_14.jpg?w=1200&q=90",
-    title: "Main Salon Floor",
-    category: "Salon"
+    title: "Our Collection",
+    category: "Products"
   },
   {
     src: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/7b593983f_15.jpg?w=1200&q=90",
-    title: "Styling Stations", 
-    category: "Salon"
+    title: "Styling Stations",
+    category: "Products"
   },
   {
     src: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/572e1afba_16.jpg?w=1200&q=90",
@@ -65,13 +65,13 @@ export default function Gallery() {
             <Sparkles className="w-4 h-4 text-[#C8A882]" />
             <span className="text-sm font-medium">Visual Journey</span>
           </div>
-          
+
           <h1 className="font-serif font-medium text-[length:var(--font-h1)] text-[#0F0F0F] mb-6 leading-tight">
-            Luxury Organic Spa & Salon in   | Serenity Wellness
+            Luxury Organic Wellness Shop | Serenity Wellness
           </h1>
-          
+
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-[1.618]">
-            Step inside our tranquil sanctuary and explore the luxurious spaces designed 
+            Step inside our tranquil sanctuary and explore the luxurious spaces designed
             for your ultimate relaxation and rejuvenation.
           </p>
         </motion.div>
@@ -83,8 +83,8 @@ export default function Gallery() {
               key={index}
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ 
-                duration: 0.8, 
+              transition={{
+                duration: 0.8,
                 delay: index * 0.1,
                 ease: "easeOut"
               }}
@@ -95,11 +95,11 @@ export default function Gallery() {
                 <div className="relative h-80 overflow-hidden">
                   <img
                     src={image.src}
-                    alt={`${image.title} at SERENITY, the premier luxury spa and salon in  ,  .`}
+                    alt={`${image.title} at SERENITY, the premier luxury wellness shop.`}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
+
                   {/* Overlay Content */}
                   <div className="absolute inset-0 flex items-end justify-start p-6 opacity-0 group-hover:opacity-100 transition-all duration-500">
                     <div className="text-white">
@@ -134,10 +134,10 @@ export default function Gallery() {
               Ready to Experience Serenity?
             </h2>
             <p className="text-gray-600 mb-8 max-w-2xl mx-auto leading-[1.618]">
-              Book your appointment today and step into our world of luxury, wellness, and tranquility. 
+              Book your appointment today and step into our world of luxury, wellness, and tranquility.
               Our organic spa treatments await.
             </p>
-            <button 
+            <button
               onClick={() => window.dispatchEvent(new CustomEvent('open-booking-modal'))}
               className="bg-[#C8A882] text-white px-8 py-4 rounded-full font-medium hover:bg-[#FF5C8D] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
               Schedule Your Visit

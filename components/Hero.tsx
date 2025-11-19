@@ -1,43 +1,42 @@
-
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, ArrowRight, MapPin, Users, Award } from "lucide-react";
+import { Sparkles, ArrowRight, MapPin, Users, Award, ShoppingBag, Truck } from "lucide-react";
 
 const slides = [
   {
     id: 1,
     image_url: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/831601306_14.jpg?w=2560&q=90",
-    headline: "#1 Luxury Spa & Salon",
-    subheading: "Where Wellness Meets Luxury at SERENITY",
-    description: "Transform Your Look. Rejuvenate Your Soul. Experience Most Exclusive Organic Spa Treatments & Premium Massage Therapy.",
-    cta_text: "BOOK YOUR LUXURY ESCAPE",
+    headline: "Premium Organic Wellness",
+    subheading: "Luxury Body Care & Skincare Delivered to Your Door",
+    description: "Transform your daily routine with our curated collection of lab-tested, organic products. Experience the essence of serenity in the comfort of your home.",
+    cta_text: "SHOP THE COLLECTION",
     isH1: true,
   },
   {
     id: 2,
     image_url: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/07d005974_12.jpg?w=2560&q=90",
-    headline: "5-Star Rated Luxury Spa Experience",
-    subheading: "Premium Interior Design & Certified Therapists",
-    description: "Experience our meticulously designed spa interiors in  ,   where every detail reflects sophistication and tranquility for your ultimate comfort.",
-    cta_text: "EXPLORE OUR SANCTUARY",
+    headline: "Curated for Purity",
+    subheading: "100% Organic & Cruelty-Free Ingredients",
+    description: "Discover our exclusive range of ethically sourced wellness essentials. Every product is chosen for its purity, potency, and environmental responsibility.",
+    cta_text: "EXPLORE ORGANIC",
     isH1: false,
   },
   {
     id: 3,
     image_url: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/4289f0848_13.jpg?w=2560&q=90",
-    headline: "Award-Winning Organic Spa Treatments",
-    subheading: "Sophisticated Treatment Spaces in  ",
-    description: "Indulge in our beautifully crafted treatment rooms designed for privacy, comfort, and the ultimate organic spa experience in  .",
-    cta_text: "DISCOVER PREMIUM WELLNESS",
+    headline: "The Gift of Serenity",
+    subheading: "Luxury Sets for You & Your Loved Ones",
+    description: "Give the gift of wellness with our beautifully packaged gift sets. Perfect for any occasion, designed to pamper and rejuvenate.",
+    cta_text: "SHOP GIFT SETS",
     isH1: false,
   }
 ];
 
 // Trust indicators data
 const trustIndicators = [
-  { icon: Users, text: "2000+ Happy Clients", color: "text-white" },
-  { icon: Award, text: "5-Star Rated Spa", color: "text-[#C8A882]" },
-  { icon: MapPin, text: "Prime   Location", color: "text-white" }
+  { icon: Users, text: "5000+ Happy Customers", color: "text-white" },
+  { icon: Award, text: "Certified Organic", color: "text-[#C8A882]" },
+  { icon: Truck, text: "Fast Shipping", color: "text-white" }
 ];
 
 export default function Hero() {
@@ -70,7 +69,7 @@ export default function Hero() {
         >
           <img
             src={currentSlide.image_url}
-            alt={`SERENITY Luxury Spa & Salon in     - ${currentSlide.headline}. Offering Organic Spa Treatments and Premium Massage Therapy.`}
+            alt={`SERENITY Wellness Shop - ${currentSlide.headline}. ${currentSlide.subheading}`}
             className="w-full h-full object-cover object-center"
             style={{
               objectPosition: 'center center',
@@ -83,7 +82,7 @@ export default function Hero() {
           />
         </motion.div>
       </AnimatePresence>
-      
+
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent z-10" />
 
@@ -122,7 +121,7 @@ export default function Hero() {
               <p className="text-gray-100 text-[clamp(1.125rem,4vw,1.5rem)] font-light leading-relaxed max-w-4xl">
                 {currentSlide.description}
               </p>
-              
+
               {/* Trust Indicators - Responsive Layout */}
               <div className="flex flex-wrap gap-4 sm:gap-6 pt-2 sm:pt-4">
                 {trustIndicators.map((indicator, index) => (
@@ -138,24 +137,24 @@ export default function Hero() {
                   </motion.div>
                 ))}
               </div>
-              
+
               {/* CTA Buttons - Super Responsive */}
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 pt-4 sm:pt-6">
                 <button
-                  onClick={() => window.dispatchEvent(new CustomEvent('open-booking-modal'))}
+                  onClick={() => window.location.href = '/shop'}
                   className="group bg-gradient-to-r from-[#C8A882] to-[#FF5C8D] text-white px-6 sm:px-8 lg:px-10 py-4 sm:py-5 rounded-full font-sans font-semibold text-sm sm:text-base lg:text-lg hover:from-[#FF5C8D] hover:to-[#C8A882] transition-all duration-500 hover:scale-105 shadow-2xl hover:shadow-[#C8A882]/30 flex items-center justify-center gap-2 sm:gap-3 min-h-[48px] sm:min-h-[56px] lg:min-h-[60px] w-full sm:w-auto"
                 >
                   <span className="text-center leading-tight">
                     {currentSlide.cta_text}
                   </span>
-                  <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-2 transition-transform duration-300 flex-shrink-0" />
+                  <ShoppingBag className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-2 transition-transform duration-300 flex-shrink-0" />
                 </button>
-                
+
                 <button
-                  onClick={() => window.location.href = 'tel:+919876543210'}
+                  onClick={() => window.location.href = '/shop?category=new-arrivals'}
                   className="group bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 px-6 sm:px-8 py-4 sm:py-5 rounded-full font-sans font-semibold text-sm sm:text-base lg:text-lg hover:bg-white hover:text-[#0F0F0F] transition-all duration-500 flex items-center justify-center gap-2 sm:gap-3 min-h-[48px] sm:min-h-[56px] lg:min-h-[60px] w-full sm:w-auto"
                 >
-                  <span className="whitespace-nowrap">Call Now: +91 98765 43210</span>
+                  <span className="whitespace-nowrap">View New Arrivals</span>
                 </button>
               </div>
 
@@ -171,7 +170,7 @@ export default function Hero() {
                   <span className="text-[#C8A882] font-medium text-xs sm:text-sm">LIMITED TIME OFFER</span>
                 </div>
                 <p className="text-white/90 text-xs sm:text-sm leading-relaxed">
-                  Book today and receive a complimentary organic facial add-on worth ₹2,500
+                  Free shipping on all orders over ₹2,000. Shop now and receive a complimentary sample kit.
                 </p>
               </motion.div>
             </motion.div>
@@ -185,16 +184,15 @@ export default function Hero() {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
-              currentIndex === index ? "bg-white scale-125" : "bg-white/50 hover:bg-white"
-            }`}
+            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${currentIndex === index ? "bg-white scale-125" : "bg-white/50 hover:bg-white"
+              }`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
 
       {/* Enhanced CSS for perfect responsiveness and a subtle, faded glow effect */}
-      <style jsx>{`
+      <style>{`
         .enhanced-glow-text {
           /* A much softer, more subtle glow */
           text-shadow: 

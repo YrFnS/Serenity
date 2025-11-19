@@ -1,21 +1,3 @@
-# SERENITY Spa & Beauty Salon
-
-A modern, responsive website for SERENITY - luxury spa and beauty salon. This React application showcases our comprehensive wellness services, booking system, and elegant digital presence.
-
-## 🌟 Features
-
-- **Modern React Architecture**: Built with React 18, TypeScript, and Vite for optimal performance
-- **Responsive Design**: Tailwind CSS ensures beautiful experience across all devices
-- **Service Catalog**: Comprehensive display of spa treatments, beauty services, and laser hair removal
-- **Interactive Booking**: Built-in booking modal for appointment scheduling
-- **Admin Dashboard**: Management interfaces for bookings and notifications
-- **SEO Optimized**: Structured data and meta tags for search engine visibility
-- **Smooth Animations**: Framer Motion for elegant transitions and micro-interactions
-- **Chat Integration**: AI-powered chatbot for customer assistance
-
-## 🛠️ Technology Stack
-
-### Frontend Framework
 - **React 18.3.1** - Modern React with hooks and concurrent features
 - **TypeScript 5.6.3** - Type-safe development experience
 - **Vite 6.0.2** - Fast build tool and development server
@@ -136,15 +118,6 @@ npm run dev
 - Cece's Signature Facial
 - Advanced skin treatments
 
-## 🏢 Location & Contact
-
-**SERENITY Spa & Beauty Salon**
- ,  , West Bengal, India
-
-📞 Phone: [Contact Number]
-📧 Email: [Email Address]
-📍 Address: [Full Address]
-
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -155,7 +128,7 @@ npm run dev
 
 ## 📝 License
 
-This project is proprietary and confidential to SERENITY Spa & Beauty Salon.
+This project is proprietary and confidential to SERENITY Wellness Shop.
 
 ## 🌐 Website
 

@@ -7,49 +7,49 @@ const testimonials = [
   {
     id: 1,
     name: "Sunita Verma",
-    role: "Manager",
-    rating: 4,
-    text: "A truly professional and rejuvenating experience. The staff is courteous and the ambiance is perfect for relaxation. I left feeling refreshed and renewed. Highly recommended for anyone seeking a premium spa service in the city.",
+    role: "Verified Buyer",
+    rating: 5,
+    text: "I've been using the organic body oil for a month now and my skin has never felt better. The packaging was beautiful and it arrived within 2 days!",
     image_url: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/8e0908ef4_image.png?w=800&q=90"
   },
   {
     id: 2,
     name: "Priya Sharma",
-    role: "Fashion Designer",
+    role: "Beauty Enthusiast",
     rating: 5,
-    text: "SERENITY has completely transformed my beauty routine. The highly skilled professionals and premium equipment deliver results that exceed expectations. Every visit feels like a luxury retreat in the heart of  .",
+    text: "SERENITY's skincare range is a game changer. I love that everything is organic and cruelty-free. The face serum is my absolute favorite.",
     image_url: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/845cb87f5_image.png?w=800&q=90"
   },
   {
     id: 3,
     name: "Anjali Das",
-    role: "Corporate Executive",
+    role: "Verified Buyer",
     rating: 4,
-    text: "The attention to detail and professional expertise at SERENITY is unmatched. Their state-of-the-art equipment and skilled staff make every treatment a perfect experience. I wouldn't trust my skin and wellness to anyone else.",
+    text: "Great quality products. The hair mask worked wonders for my dry hair. Shipping was fast and the customer service team was very helpful.",
     image_url: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/1acf8ba01_image.png?w=800&q=90"
   },
   {
     id: 4,
     name: "Ritu Banerjee",
-    role: "Entrepreneur",
+    role: "Wellness Blogger",
     rating: 5,
-    text: "From the moment you enter SERENITY, you know you're in for something special. The combination of luxury ambiance, professional staff, and cutting-edge treatments creates an experience that's truly transformative.",
+    text: "I recommend SERENITY products to all my followers. The quality is consistent and I love their commitment to sustainability. A premium experience from start to finish.",
     image_url: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/088f1f218_image.png?w=800&q=90"
   },
   {
     id: 5,
     name: "Meera Singh",
-    role: "Doctor",
-    rating: 4,
-    text: "As a healthcare professional, I appreciate SERENITY's commitment to using premium equipment and maintaining the highest standards. The skilled therapists understand exactly what my body needs for complete rejuvenation.",
+    role: "Dermatologist",
+    rating: 5,
+    text: "As a skin specialist, I am impressed by the ingredient lists. Clean, effective, and safe. I use the night cream personally and love the results.",
     image_url: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/7cf2b68ad_image.png?w=800&q=90"
   },
   {
     id: 6,
     name: "Kavita Roy",
-    role: "Business Owner",
+    role: "Verified Buyer",
     rating: 5,
-    text: "SERENITY sets the gold standard for luxury wellness in  . The professional expertise combined with world-class equipment ensures every treatment delivers exceptional results. It's my personal sanctuary for beauty and wellness.",
+    text: "The best online shopping experience for wellness products. The website is easy to use and the products are exactly as described. Will definitely order again.",
     image_url: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/2ffc407b6_image.png?w=800&q=90"
   }
 ];
@@ -119,7 +119,7 @@ export default function TestimonialsSection() {
             className="relative"
           >
             <Quote className="absolute -top-2 -right-2 w-16 h-16 text-gray-200/80" />
-            
+
             <h2 className="font-serif text-4xl lg:text-5xl font-light italic text-[#0F0F0F] mb-8 relative z-10">
               Testimonials
             </h2>
@@ -160,11 +160,10 @@ export default function TestimonialsSection() {
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className={`w-5 h-5 transition-colors duration-300 ${
-                        i < currentTestimonial.rating
+                      className={`w-5 h-5 transition-colors duration-300 ${i < currentTestimonial.rating
                           ? 'text-[#C8A882] fill-current'
                           : 'text-gray-300'
-                      }`}
+                        }`}
                     />
                   ))}
                 </div>
@@ -203,11 +202,10 @@ export default function TestimonialsSection() {
                   <button
                     key={index}
                     onClick={() => goToTestimonial(index)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      index === currentIndex
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentIndex
                         ? 'bg-[#C8A882] w-6'
                         : 'bg-gray-300 hover:bg-gray-400'
-                    }`}
+                      }`}
                   />
                 ))}
               </div>

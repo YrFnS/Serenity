@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { Sparkles, Home, Scissors, ArrowRight } from "lucide-react";
+import { Sparkles, Home, ShoppingBag, ArrowRight } from "lucide-react";
 
 const sitePages = [
   {
@@ -11,58 +11,58 @@ const sitePages = [
       {
         name: "Home",
         url: "/",
-        description: "Welcome to SERENITY -  's premier luxury spa & salon experience"
+        description: "Welcome to SERENITY - Your premier destination for organic wellness products"
       },
       {
-        name: "Services",
-        url: createPageUrl("Services"),
-        description: "Complete menu of premium spa treatments, beauty services, and wellness therapies"
+        name: "Shop",
+        url: createPageUrl("Shop"),
+        description: "Browse our curated collection of skincare, body care, and wellness essentials"
       },
       {
         name: "Gallery",
         url: createPageUrl("Gallery"),
-        description: "Visual tour of our luxurious facilities and elegant treatment spaces"
+        description: "Visual showcase of our premium products and organic ingredients"
       },
       {
         name: "Our Team",
         url: createPageUrl("Team"),
-        description: "Meet our certified professionals and expert therapists"
+        description: "Meet the experts behind our organic formulations"
       },
       {
         name: "Contact",
         url: createPageUrl("Contact"),
-        description: "Get in touch, find our location, and connect with us"
+        description: "Get in touch with our customer support team"
       }
     ]
   },
   {
-    category: "Service Categories",
-    icon: Scissors,
+    category: "Shop Categories",
+    icon: ShoppingBag,
     pages: [
       {
-        name: "Massage Therapy",
-        url: createPageUrl("Services?category=massage"),
-        description: "Swedish, Thai, Deep Tissue, Japanese Head Spa, and therapeutic massages"
+        name: "Skincare",
+        url: createPageUrl("Shop?category=skincare"),
+        description: "Face serums, moisturizers, cleansers, and treatments"
       },
       {
-        name: "Beauty & Cosmetics",
-        url: createPageUrl("Services?category=beauty"),
-        description: "Microblading, Lash Extensions, Lip Blush, and premium beauty treatments"
+        name: "Body Care",
+        url: createPageUrl("Shop?category=bodycare"),
+        description: "Body lotions, oils, scrubs, and bath essentials"
       },
       {
-        name: "Laser Hair Removal",
-        url: createPageUrl("Services?category=laser"),
-        description: "Advanced laser technology for permanent hair reduction"
+        name: "Hair Care",
+        url: createPageUrl("Shop?category=haircare"),
+        description: "Shampoos, conditioners, masks, and styling products"
       },
       {
-        name: "Nail Care Services",
-        url: createPageUrl("Services?category=nails"),
-        description: "Manicures, Pedicures, Gel Extensions, and nail artistry"
+        name: "Health & Wellness",
+        url: createPageUrl("Shop?category=healthcare"),
+        description: "Supplements, teas, and wellness accessories"
       },
       {
-        name: "Hair Services",
-        url: createPageUrl("Services?category=hair"),
-        description: "Cuts, Colors, Treatments, Extensions, and professional styling"
+        name: "Accessories",
+        url: createPageUrl("Shop?category=other"),
+        description: "Beauty tools, brushes, and gift sets"
       }
     ]
   }
@@ -83,13 +83,13 @@ export default function Sitemap() {
             <Sparkles className="w-4 h-4 text-[#C8A882]" />
             <span className="text-sm font-medium">Site Navigation</span>
           </div>
-          
+
           <h1 className="font-serif font-medium text-[length:var(--font-h1)] text-[#0F0F0F] mb-6 leading-tight">
             SERENITY Website Sitemap
           </h1>
-          
+
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-[1.618]">
-            Navigate through all pages and services of our luxury wellness website. 
+            Navigate through all pages and collections of our luxury wellness shop.
             Find exactly what you're looking for in our organized site structure.
           </p>
         </motion.div>
@@ -101,8 +101,8 @@ export default function Sitemap() {
               key={section.category}
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ 
-                duration: 0.8, 
+              transition={{
+                duration: 0.8,
                 delay: sectionIndex * 0.2,
                 ease: "easeOut"
               }}
@@ -125,8 +125,8 @@ export default function Sitemap() {
                     key={page.name}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ 
-                      duration: 0.6, 
+                    transition={{
+                      duration: 0.6,
                       delay: sectionIndex * 0.2 + pageIndex * 0.1
                     }}
                     className="group"
@@ -141,11 +141,11 @@ export default function Sitemap() {
                         </h3>
                         <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-[#C8A882] group-hover:translate-x-1 transition-all duration-300" />
                       </div>
-                      
+
                       <p className="text-gray-600 text-sm leading-relaxed mb-3">
                         {page.description}
                       </p>
-                      
+
                       <div className="text-xs font-mono text-[#C8A882] bg-[#C8A882]/10 px-3 py-1 rounded-full inline-block">
                         {page.url}
                       </div>
@@ -167,7 +167,7 @@ export default function Sitemap() {
           <h2 className="font-serif text-2xl font-bold text-[#0F0F0F] mb-6 text-center">
             About Our Website
           </h2>
-          
+
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h3 className="font-serif text-lg font-bold text-[#C8A882] mb-3">
@@ -175,20 +175,20 @@ export default function Sitemap() {
               </h3>
               <ul className="space-y-2 text-gray-600">
                 <li>• Responsive design for all devices</li>
-                <li>• Advanced booking system</li>
-                <li>• Professional service catalog</li>
+                <li>• Secure shopping cart system</li>
+                <li>• Comprehensive product catalog</li>
                 <li>• Interactive gallery showcase</li>
-                <li>• Team member profiles</li>
-                <li>• Contact and location information</li>
+                <li>• Expert team profiles</li>
+                <li>• Contact and shipping information</li>
               </ul>
             </div>
-            
+
             <div>
               <h3 className="font-serif text-lg font-bold text-[#C8A882] mb-3">
                 Our Location
               </h3>
               <div className="text-gray-600 space-y-1">
-                <p>SERENITY Luxury Spa & Salon</p>
+                <p>SERENITY Wellness Shop</p>
                 <p>P-145, Sector A, Metropolitan Co-Operative</p>
                 <p>Housing Society Limited,  </p>
                 <p> , West Bengal 700105</p>
@@ -210,14 +210,14 @@ export default function Sitemap() {
               Ready to Experience Serenity?
             </h2>
             <p className="text-lg mb-8 text-white/90 max-w-2xl mx-auto">
-              Book your appointment today and discover why we're  's premier luxury spa & salon destination.
+              Explore our collection today and discover why we're the premier destination for organic wellness.
             </p>
-            <button 
-              onClick={() => window.dispatchEvent(new CustomEvent('open-booking-modal'))}
-              className="bg-white text-[#C8A882] px-8 py-4 rounded-full font-medium hover:bg-gray-50 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+            <Link
+              to="/shop"
+              className="inline-block bg-white text-[#C8A882] px-8 py-4 rounded-full font-medium hover:bg-gray-50 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
             >
-              Book Your Experience
-            </button>
+              Shop Our Collection
+            </Link>
           </div>
         </motion.div>
       </div>

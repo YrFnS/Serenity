@@ -1,12 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "@/Layout";
 import Home from "@/pages/Home";
-import Services from "@/pages/Services";
+import Shop from "@/pages/Shop";
 import Gallery from "@/pages/Gallery";
 import Team from "@/pages/Team";
 import Contact from "@/pages/Contact";
-import BookingNotifications from "@/pages/BookingNotifications";
-import AdminBookings from "@/pages/AdminBookings";
+import AdminProducts from "@/pages/AdminProducts";
 import Sitemap from "@/pages/Sitemap";
 
 function App() {
@@ -20,12 +19,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={renderPage(Home, "Home")} />
-        <Route path="/services" element={renderPage(Services, "Services")} />
+        <Route path="/shop" element={renderPage(Shop, "Shop")} />
         <Route path="/gallery" element={renderPage(Gallery, "Gallery")} />
         <Route path="/team" element={renderPage(Team, "Team")} />
         <Route path="/contact" element={renderPage(Contact, "Contact")} />
-        <Route path="/bookingnotifications" element={renderPage(BookingNotifications, "BookingNotifications")} />
-        <Route path="/adminbookings" element={renderPage(AdminBookings, "AdminBookings")} />
+        <Route path="/admin-products" element={renderPage(AdminProducts, "AdminProducts")} />
         <Route path="/sitemap" element={renderPage(Sitemap, "Sitemap")} />
         <Route
           path="*"

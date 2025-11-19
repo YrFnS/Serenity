@@ -10,7 +10,7 @@ export default function ChatBot() {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "Hello! I'm Serenity, your AI assistant at SERENITY Spa & Salon. I can help you with:\n\n🔹 Book appointments for any of our 42+ services\n🔹 Check service prices and details\n🔹 Find your existing bookings\n🔹 Get directions and contact info\n🔹 Learn about our organic treatments\n🔹 Answer wellness questions\n\nHow can I assist you today?",
+      text: "Hello! I'm Serenity, your AI assistant at SERENITY Wellness Shop. I can help you with:\n\n🔹 Browse our organic products\n🔹 Check product details and ingredients\n🔹 Track your orders\n🔹 Get shipping information\n🔹 Learn about our organic philosophy\n🔹 Answer wellness questions\n\nHow can I assist you today?",
       sender: "bot",
       timestamp: new Date()
     }
@@ -30,13 +30,13 @@ export default function ChatBot() {
   const getSystemPrompt = async () => {
     // Get current appointments for context
     const recentAppointments = await Appointment.list("-created_date", 50);
-    
-    return `You are Serenity, an AI assistant for SERENITY Spa & Salon,  's premier luxury wellness destination specializing in organic spa treatments. You are friendly, professional, knowledgeable about wellness and beauty, and always helpful.
 
-SERENITY Spa & Salon Information:
+    return `You are Serenity, an AI assistant for SERENITY Wellness Shop, a premier luxury wellness destination specializing in organic products. You are friendly, professional, knowledgeable about wellness and beauty, and always helpful.
+
+SERENITY Wellness Shop Information:
 - Location: P-145, Sector A, Metropolitan Co-Operative Housing Society Limited,  ,  , West Bengal 700105
 - Phone: +91 98765 43210
-- Email: info@serenitysalon.in, serenitybycece@gmail.com
+- Email: info@serenityshop.in, serenitybycece@gmail.com
 - Hours: 
   * Monday-Friday: 10:00 AM - 8:00 PM
   * Saturday: 9:00 AM - 7:00 PM  
@@ -160,13 +160,13 @@ Remember: You represent a luxury spa brand, so maintain that premium, caring, an
 
     try {
       const systemPrompt = await getSystemPrompt();
-      
+
       const response = await InvokeLLM({
         prompt: `${systemPrompt}
 
 User message: ${inputText}
 
-Please respond as Serenity, the AI assistant for SERENITY Spa & Salon. Be helpful, friendly, professional, and provide accurate information about services, appointments, and spa-related topics. Format your response nicely with line breaks where appropriate for better readability.`,
+Please respond as Serenity, the AI assistant for SERENITY Luxury Wellness Shop. Be helpful, friendly, professional, and provide accurate information about services, appointments, and spa-related topics. Format your response nicely with line breaks where appropriate for better readability.`,
         add_context_from_internet: false
       });
 
@@ -277,7 +277,7 @@ Please respond as Serenity, the AI assistant for SERENITY Spa & Salon. Be helpfu
                   </div>
                 </motion.div>
               ))}
-              
+
               {isTyping && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}

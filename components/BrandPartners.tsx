@@ -60,15 +60,15 @@ export default function BrandPartners() {
           `}</style>
           <div className="marquee-container">
             {extendedBrands.map((brand, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="logo-item flex-shrink-0 w-48 mx-8 lg:mx-12 flex items-center justify-center h-24"
               >
                 <img
                   src={brand.url}
-                  alt={`${brand.name} logo - Premium beauty products at SERENITY Spa  `}
+                  alt={`${brand.name} logo - Premium beauty products at SERENITY Wellness Shop`}
                   className="h-14 w-auto object-contain filter grayscale opacity-70 transition-all duration-300 ease-in-out hover:grayscale-0 hover:opacity-100 hover:scale-110"
-                  style={{ 
+                  style={{
                     imageRendering: 'crisp-edges',
                     maxHeight: '56px',
                     height: '56px'

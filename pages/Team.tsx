@@ -55,7 +55,7 @@ export default function Team() {
   return (
     <div className="pt-32 pb-24 bg-gradient-to-b from-[#F8F2EC] to-white min-h-screen">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        
+
         {/* Page Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -79,7 +79,7 @@ export default function Team() {
         <section className="mb-24">
           <div className="grid lg:grid-cols-12 gap-12 items-center bg-white rounded-3xl p-8 lg:p-12 shadow-2xl shadow-[#C8A882]/10 border border-[#C8A882]/20">
             {/* Founder Image */}
-            <motion.div 
+            <motion.div
               className="lg:col-span-5"
               initial={{ opacity: 0, scale: 0.8, x: -50 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
@@ -88,22 +88,22 @@ export default function Team() {
               <div className="rounded-3xl overflow-hidden shadow-xl aspect-[4/5]">
                 <img
                   src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/687b36742c848dbd788ca716/0c96d7c03_Gemini_Generated_Image_kavr2wkavr2wkavr.png"
-                  alt="Chami Chhakchhuak (Cece), Visionary Founder of SERENITY Luxury Spa & Salon in  "
+                  alt="Chami Chhakchhuak (Cece), Visionary Founder of SERENITY Wellness Shop"
                   className="w-full h-full object-cover object-center"
                 />
               </div>
             </motion.div>
-            
+
             {/* Founder's Story */}
-            <motion.div 
+            <motion.div
               className="lg:col-span-7"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
             >
               <h2 className="font-serif text-3xl lg:text-4xl font-bold text-[#0F0F0F] mb-2">Chami Chhakchhuak (Cece)</h2>
-              <p className="font-sans text-lg text-[#C8A882] font-medium mb-6">The Visionary Founder of Serenity Salon & Spa</p>
-              
+              <p className="font-sans text-lg text-[#C8A882] font-medium mb-6">The Visionary Founder of Serenity Wellness Shop</p>
+
               <div className="space-y-6 font-sans text-gray-700 leading-relaxed text-base lg:text-lg">
                 <p>
                   "Hi, I’m Cece. For me, beauty and self-care have never been just a job; they are the most meaningful way I know to connect with people. It’s my ultimate goal to help every client feel <strong>confident, comfortable, and radiant in their own skin.</strong> That deep conviction is what led me to found <strong>SERENITY</strong>."
@@ -125,10 +125,10 @@ export default function Team() {
                 </div>
 
                 <div>
-                   <h3 className="font-serif text-xl lg:text-2xl font-semibold text-[#0F0F0F] mb-4 border-l-4 border-[#C8A882] pl-4">Why I Created SERENITY</h3>
-                   <p>
-                     After years of training, I knew I needed to create a space that reflected my full philosophy—a sanctuary where you can feel completely cared for. Whether you come for perfectly defined brows, flawless lashes, or a deeply relaxing spa experience, my promise is care that feels both <strong>luxurious and profoundly personal.</strong> Serenity Salon & Spa is the realization of my lifelong passion, and I built it to be your sanctuary, too.
-                   </p>
+                  <h3 className="font-serif text-xl lg:text-2xl font-semibold text-[#0F0F0F] mb-4 border-l-4 border-[#C8A882] pl-4">Why I Created SERENITY</h3>
+                  <p>
+                    After years of research, I knew I needed to create a space that reflected my full philosophy—a sanctuary where you can find the purest products. Whether you come for skincare, body care, or wellness essentials, my promise is quality that feels both <strong>luxurious and profoundly personal.</strong> Serenity Wellness Shop is the realization of my lifelong passion, and I built it to be your sanctuary, too.
+                  </p>
                 </div>
               </div>
 
@@ -140,24 +140,24 @@ export default function Team() {
 
         {/* Expertise Pillars */}
         <section className="mb-24 text-center">
-            <h2 className="font-serif text-3xl font-bold text-[#0F0F0F] mb-12">Our Philosophy in Practice</h2>
-            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                {expertisePillars.map((pillar, index) => (
-                    <motion.div
-                        key={pillar.title}
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: index * 0.2 + 0.5, ease: "easeOut" }}
-                        className="bg-white p-8 rounded-3xl shadow-lg border border-[#C8A882]/20 flex flex-col items-center"
-                    >
-                        <div className="w-16 h-16 bg-[#C8A882]/10 rounded-full flex items-center justify-center mb-4">
-                            <pillar.icon className="w-8 h-8 text-[#C8A882]" />
-                        </div>
-                        <h3 className="font-serif text-xl font-semibold text-[#0F0F0F] mb-2">{pillar.title}</h3>
-                        <p className="text-gray-600 text-sm text-center leading-relaxed">{pillar.description}</p>
-                    </motion.div>
-                ))}
-            </div>
+          <h2 className="font-serif text-3xl font-bold text-[#0F0F0F] mb-12">Our Philosophy in Practice</h2>
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {expertisePillars.map((pillar, index) => (
+              <motion.div
+                key={pillar.title}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.2 + 0.5, ease: "easeOut" }}
+                className="bg-white p-8 rounded-3xl shadow-lg border border-[#C8A882]/20 flex flex-col items-center"
+              >
+                <div className="w-16 h-16 bg-[#C8A882]/10 rounded-full flex items-center justify-center mb-4">
+                  <pillar.icon className="w-8 h-8 text-[#C8A882]" />
+                </div>
+                <h3 className="font-serif text-xl font-semibold text-[#0F0F0F] mb-2">{pillar.title}</h3>
+                <p className="text-gray-600 text-sm text-center leading-relaxed">{pillar.description}</p>
+              </motion.div>
+            ))}
+          </div>
         </section>
 
         {/* Other Team Members */}
@@ -176,7 +176,7 @@ export default function Team() {
                   <div className="relative h-80 overflow-hidden">
                     <img
                       src={member.image_url}
-                      alt={`${member.name}, ${member.title} at SERENITY Luxury Spa & Salon  `}
+                      alt={`${member.name}, ${member.title} at SERENITY Wellness Shop`}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     <div className="absolute top-4 right-4 bg-[#C8A882] text-white rounded-full px-3 py-1 flex items-center gap-1">

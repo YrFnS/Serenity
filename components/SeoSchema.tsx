@@ -7,7 +7,7 @@ export default function SeoSchema() {
       {
         "@type": "HealthAndBeautyBusiness",
         "@id": "https://www.serenitysalon.in/#organization",
-        "name": "SERENITY Luxury Spa & Salon",
+        "name": "SERENITY Luxury Wellness Shop",
         "url": "https://www.serenitysalon.in/",
         "logo": "https://www.serenitysalon.in/logo.png", // Placeholder URL, should be replaced with actual logo URL
         "description": "Discover SERENITY,  's #1 luxury organic spa and salon in  . We offer world-class, state-of-the-art equipment and highly skilled, certified professionals for premium organic spa treatments, therapeutic massages, and advanced beauty services. Your ultimate wellness sanctuary.",
@@ -46,7 +46,7 @@ export default function SeoSchema() {
         "@type": "WebSite",
         "@id": "https://www.serenitysalon.in/#website",
         "url": "https://www.serenitysalon.in/",
-        "name": "SERENITY Luxury Spa & Salon",
+        "name": "SERENITY Luxury Wellness Shop",
         "publisher": { "@id": "https://www.serenitysalon.in/#organization" },
         "potentialAction": {
             "@type": "SearchAction",

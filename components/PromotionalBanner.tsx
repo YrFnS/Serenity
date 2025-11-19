@@ -12,7 +12,7 @@ export default function PromotionalBanner() {
             key={i}
             className="absolute"
             initial={{ opacity: 0, scale: 0, rotate: 0 }}
-            animate={{ 
+            animate={{
               opacity: [0, 1, 0],
               scale: [0, 1, 0],
               rotate: [0, 180, 360],
@@ -86,19 +86,13 @@ export default function PromotionalBanner() {
             viewport={{ once: true }}
             className="pt-6"
           >
-            <motion.button
-              whileHover={{ 
-                scale: 1.05, 
-                boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
-                backgroundColor: "#C8A882"
-              }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => window.dispatchEvent(new CustomEvent('open-booking-modal'))}
-              className="group bg-black/80 backdrop-blur-sm text-white px-8 py-4 rounded-full font-sans font-medium hover:bg-[#C8A882] transition-all duration-300 shadow-xl border border-white/20 flex items-center justify-center gap-3 mx-auto"
+            <a
+              href="/shop"
+              className="group bg-black/80 backdrop-blur-sm text-white px-8 py-4 rounded-full font-sans font-medium hover:bg-[#C8A882] transition-all duration-300 shadow-xl border border-white/20 flex items-center justify-center gap-3 mx-auto inline-flex"
             >
-              CLAIM YOUR MEMBERSHIP
+              SHOP EXCLUSIVE OFFERS
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-            </motion.button>
+            </a>
           </motion.div>
 
           {/* Decorative Elements */}
@@ -119,7 +113,7 @@ export default function PromotionalBanner() {
       {/* Additional Floating Petals */}
       <motion.div
         initial={{ opacity: 0, y: 100, rotate: 45 }}
-        animate={{ 
+        animate={{
           opacity: [0.3, 0.7, 0.3],
           y: [100, -20, -50],
           rotate: [45, -45, 45]
@@ -131,10 +125,10 @@ export default function PromotionalBanner() {
         }}
         className="absolute top-10 right-10 w-8 h-8 bg-white/20 rounded-full blur-sm"
       />
-      
+
       <motion.div
         initial={{ opacity: 0, y: 50, rotate: -30 }}
-        animate={{ 
+        animate={{
           opacity: [0.2, 0.5, 0.2],
           y: [50, -30, -60],
           rotate: [-30, 30, -30]

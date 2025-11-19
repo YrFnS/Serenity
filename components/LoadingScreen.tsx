@@ -522,7 +522,7 @@ export default function LoadingScreen({ onLoadingComplete }) {
                 SERENITY
               </h1>
               <p className="text-sm text-gray-600 tracking-widest uppercase">
-                Luxury Spa & Salon
+                Luxury Wellness Shop
               </p>
             </motion.div>
           </motion.div>
