@@ -2,7 +2,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { Sparkles, Phone, Mail, Instagram, Facebook, MapPin, X, Menu } from "lucide-react";
+import { Flower, Phone, Mail, Instagram, Facebook, MapPin, X, Menu } from "lucide-react";
 import ChatBot from "@/components/ChatBot";
 import BookingModal from "@/components/BookingModal";
 import ReviewWidget from "@/components/ReviewWidget";
@@ -220,7 +220,7 @@ export default function Layout({ children, currentPageName }) {
               aria-label="LYA Spa & Salon - Go to homepage"
             >
               <div className="relative">
-                <Sparkles 
+                <Flower 
                   className={`w-8 h-8 sparkle-animation ${isScrolled || isMenuOpen ? 'text-[#C8A882]' : 'text-white text-shadow-dark'}`}
                   aria-hidden="true"
                 />
@@ -345,7 +345,7 @@ export default function Layout({ children, currentPageName }) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[clamp(1rem,2vw,2.5rem)] text-center md:text-left">
             <div className="lg:col-span-1 flex flex-col items-center md:items-start mb-[1.2em]">
               <div className="flex items-center gap-3 mb-6">
-                <Sparkles className="w-8 h-8 text-[#C8A882] sparkle-animation" aria-hidden="true" />
+                <Flower className="w-8 h-8 text-[#C8A882] sparkle-animation" aria-hidden="true" />
                 <div>
                   <h2 className="font-serif text-2xl font-bold glow-text">{t('brand.name')}</h2>
                   <p className="text-xs text-[#C8A882] tracking-widest">
