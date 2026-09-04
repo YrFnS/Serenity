@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const categories = [
   {
@@ -110,6 +111,7 @@ const categories = [
 ];
 
 export default function CategoriesSection() {
+  const { t, language } = useLanguage();
   const scrollRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -166,17 +168,17 @@ export default function CategoriesSection() {
         >
           <div className="inline-flex items-center gap-2 bg-[#C8A882]/10 rounded-full px-4 py-2 mb-6">
             <Sparkles className="w-4 h-4 text-[#C8A882]" />
-            <span className="font-sans text-sm text-[#C8A882] font-medium">Our Expertise</span>
+            <span className="font-sans text-sm text-[#C8A882] font-medium">{t("categories.pill")}</span>
           </div>
           
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            <span className="text-[#0F0F0F]">Curated Wellness</span>
+            <span className="text-[#0F0F0F]">{t("categories.title1")}</span>
             <br />
-            <span className="text-[#C8A882]">Journeys</span>
+            <span className="text-[#C8A882]">{t("categories.title2")}</span>
           </h2>
           
           <p className="font-sans text-lg text-gray-600 max-w-2xl mx-auto">
-            Explore our world of exclusive services, each designed to deliver profound results and a sense of deep tranquility.
+            {t("categories.subtitle")}
           </p>
         </motion.div>
 
@@ -222,16 +224,16 @@ export default function CategoriesSection() {
                     
                     {/* Content */}
                     <h3 className="font-serif text-2xl font-bold text-[#0F0F0F] mb-4 group-hover:text-[#C8A882] transition-colors duration-300 leading-tight">
-                      {category.title}
+                      {t(`categories.items.${category.key}.title`)}
                     </h3>
                     
                     <p className="font-sans text-gray-500 leading-relaxed mb-6 flex-grow">
-                      {category.description}
+                      {t(`categories.items.${category.key}.description`)}
                     </p>
                     
                     {/* Read More Button */}
                     <div className="flex items-center gap-2 font-sans text-sm font-medium text-gray-500 hover:text-[#C8A882] transition-colors duration-300 group mt-auto">
-                      DISCOVER THE EXPERIENCE
+                      {t("categories.cta")}
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                     </div>
                   </div>
@@ -255,7 +257,7 @@ export default function CategoriesSection() {
         </motion.div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .scrollbar-hide {
           -ms-overflow-style: none;
           scrollbar-width: none;

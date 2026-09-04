@@ -1,5 +1,6 @@
 
 import { motion } from 'framer-motion';
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const brands = [
   { name: 'Hugo Boss', url: 'https://cdn.worldvectorlogo.com/logos/hugo-boss-logo.svg' },
@@ -20,6 +21,7 @@ const brands = [
 ];
 
 export default function BrandPartners() {
+  const { t } = useLanguage();
   const extendedBrands = [...brands, ...brands];
 
   return (
@@ -32,10 +34,10 @@ export default function BrandPartners() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
         <h3 className="text-sm font-sans font-bold uppercase tracking-widest text-gray-500 mb-12">
-          Featuring Products From The World's Finest Brands
+          {t("brands.heading")}
         </h3>
         <div className="relative w-full overflow-hidden group">
-          <style jsx>{`
+          <style>{`
             .marquee-container {
               display: flex;
               width: fit-content;
@@ -66,7 +68,7 @@ export default function BrandPartners() {
               >
                 <img
                   src={brand.url}
-                  alt={`${brand.name} logo - Premium beauty products at SERENITY Spa  `}
+                  alt={`${brand.name} - ${t("brands.logoAlt")}`}
                   className="h-14 w-auto object-contain filter grayscale opacity-70 transition-all duration-300 ease-in-out hover:grayscale-0 hover:opacity-100 hover:scale-110"
                   style={{ 
                     imageRendering: 'crisp-edges',

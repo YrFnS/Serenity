@@ -1,79 +1,67 @@
-
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Calendar, Clock, User, Mail, Phone, MessageSquare, Sparkles, Check, Download, Camera } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Appointment } from "@/entities/Appointment";
 import { BookingNotification } from "@/entities/BookingNotification";
 
-// Complete SERENITY services list with accurate data
 const services = [
-  // Massage Services
-  { name: "Swedish Massage", price: 2500, duration: "60 min", category: "Massage" },
-  { name: "Japanese Head Spa", price: 3500, duration: "90 min", category: "Massage" },
-  { name: "Thai Dry Massage", price: 3000, duration: "75 min", category: "Massage" },
-  { name: "Foot Massage", price: 1500, duration: "45 min", category: "Massage" },
-  { name: "Head and Shoulder Massage", price: 1200, duration: "30 min", category: "Massage" },
-  { name: "Deep Tissue Massage", price: 3500, duration: "60 min", category: "Massage" },
-  
-  // Beauty & Cosmetic Services
-  { name: "Classic Lash Extension", price: 2000, duration: "120 min", category: "Beauty" },
-  { name: "Hybrid Lash Extension", price: 2200, duration: "135 min", category: "Beauty" },
-  { name: "Wispy Lash Extension", price: 2200, duration: "135 min", category: "Beauty" },
-  { name: "Volume Lash Extension", price: 2500, duration: "150 min", category: "Beauty" },
-  { name: "Lash Lift", price: 1500, duration: "60 min", category: "Beauty" },
-  { name: "Microblading", price: 6000, duration: "180 min", category: "Beauty" },
-  { name: "Microshading", price: 6000, duration: "180 min", category: "Beauty" },
-  { name: "Combine Brows", price: 7000, duration: "200 min", category: "Beauty" },
-  { name: "Brow Touch Up", price: 4500, duration: "90 min", category: "Beauty" },
-  { name: "Lip Neutralisation / Lip Blush", price: 5000, duration: "120 min", category: "Beauty" },
-  { name: "Lip Touch Up", price: 2500, duration: "75 min", category: "Beauty" },
-  { name: "Permanent Eyeliner", price: 5000, duration: "90 min", category: "Beauty" },
-  { name: "Permanent Eyeliner (Upper & Lower)", price: 9000, duration: "150 min", category: "Beauty" },
-  { name: "Eyeliner Touch Up", price: 2500, duration: "75 min", category: "Beauty", priceNote: "from" },
-  
-  // Skin Treatments
-  { name: "Hydra Facial", price: 2000, duration: "60 min", category: "Skin" },
-  { name: "Stayve Korean BBGlow", price: 2500, duration: "75 min", category: "Skin" },
-  { name: "Hydra & BBGlow Combo", price: 4000, duration: "120 min", category: "Skin" },
-  { name: "Cece’s Signature Facial", price: 3000, duration: "90 min", category: "Skin" },
-  
-  // Laser Hair Removal
-  { name: "Underarm Laser", price: 1000, duration: "30 min", category: "Laser" },
-  { name: "Bikini Laser", price: 2000, duration: "45 min", category: "Laser" },
-  { name: "Full Leg Laser", price: 2000, duration: "90 min", category: "Laser" },
-  { name: "Half Leg Laser", price: 1500, duration: "60 min", category: "Laser" },
-  { name: "Full Arm Laser", price: 1500, duration: "60 min", category: "Laser" },
-  { name: "Full Face Laser", price: 1500, duration: "45 min", category: "Laser" },
-  { name: "Full Back Laser", price: 2000, duration: "75 min", category: "Laser" },
-  { name: "Stomach Laser", price: 2000, duration: "45 min", category: "Laser" },
-  { name: "Upper Lip Laser", price: 900, duration: "15 min", category: "Laser" },
-  { name: "Full Body Laser", price: 12999, duration: "240 min", category: "Laser" },
-  
-  // Nail Services
-  { name: "Soft Gel Extension", price: 1500, duration: "90 min", category: "Nails" },
-  { name: "Acrylic Extension", price: 1800, duration: "120 min", category: "Nails" },
-  { name: "Douyin Nail Extension", price: 2500, duration: "150 min", category: "Nails", priceNote: "Starting" },
-  { name: "Gel Polish", price: 500, duration: "45 min", category: "Nails" },
-  { name: "Classic Care Manicure", price: 700, duration: "60 min", category: "Nails" },
-  { name: "Royal Korean Ritual Manicure", price: 1500, duration: "90 min", category: "Nails" },
-  { name: "Classic Care Pedicure", price: 1000, duration: "75 min", category: "Nails" },
-  { name: "Royal Korean Ritual Pedicure", price: 2000, duration: "100 min", category: "Nails" },
-  { name: "Royal Korean Ritual Duo", price: 3000, duration: "180 min", category: "Nails" },
-  { name: "Gel Remove", price: 200, duration: "30 min", category: "Nails" },
-  { name: "Nail Art / Add-Ons", price: 200, duration: "15 min", category: "Nails", priceNote: "Starting" },
-
-  // Hair Services
-  { name: "Women Hair Cut", price: 800, duration: "60 min", category: "Hair" },
-  { name: "Men Hair Cut", price: 500, duration: "45 min", category: "Hair" },
-  { name: "Hair Wash", price: 300, duration: "30 min", category: "Hair" },
-  { name: "Hair Wash & Style", price: 700, duration: "60 min", category: "Hair" },
-  { name: "Hair Perming", price: 2500, duration: "180 min", category: "Hair", priceNote: "Starting" },
-  { name: "Hair Straightening", price: 3000, duration: "240 min", category: "Hair", priceNote: "Starting" },
-  { name: "Hair Colouring", price: 3500, duration: "180 min", category: "Hair", priceNote: "Starting" },
-  { name: "Hair Highlight", price: 4000, duration: "240 min", category: "Hair", priceNote: "Starting" },
-  { name: "Hair Extension", price: 1499, duration: "120 min", category: "Hair", priceNote: "Starting" },
-  { name: "Hair Spa", price: 1500, duration: "90 min", category: "Hair", priceNote: "Starting" },
-  { name: "Keratin Treatment", price: 3000, duration: "240 min", category: "Hair", priceNote: "Starting" }
+  { nameKey: "booking.services.swedishMassage", price: 2500, durationKey: "booking.durations.min60", categoryKey: "booking.categories.massage" },
+  { nameKey: "booking.services.tunisianHammam", price: 3500, durationKey: "booking.durations.min90", categoryKey: "booking.categories.massage" },
+  { nameKey: "booking.services.thaiDryMassage", price: 3000, durationKey: "booking.durations.min75", categoryKey: "booking.categories.massage" },
+  { nameKey: "booking.services.footMassage", price: 1500, durationKey: "booking.durations.min45", categoryKey: "booking.categories.massage" },
+  { nameKey: "booking.services.headShoulderMassage", price: 1200, durationKey: "booking.durations.min30", categoryKey: "booking.categories.massage" },
+  { nameKey: "booking.services.deepTissue", price: 3500, durationKey: "booking.durations.min60", categoryKey: "booking.categories.massage" },
+  { nameKey: "booking.services.classicLash", price: 2000, durationKey: "booking.durations.min120", categoryKey: "booking.categories.beauty" },
+  { nameKey: "booking.services.hybridLash", price: 2200, durationKey: "booking.durations.min135", categoryKey: "booking.categories.beauty" },
+  { nameKey: "booking.services.wispyLash", price: 2200, durationKey: "booking.durations.min135", categoryKey: "booking.categories.beauty" },
+  { nameKey: "booking.services.volumeLash", price: 2500, durationKey: "booking.durations.min150", categoryKey: "booking.categories.beauty" },
+  { nameKey: "booking.services.lashLift", price: 1500, durationKey: "booking.durations.min60", categoryKey: "booking.categories.beauty" },
+  { nameKey: "booking.services.microblading", price: 6000, durationKey: "booking.durations.min180", categoryKey: "booking.categories.beauty" },
+  { nameKey: "booking.services.microshading", price: 6000, durationKey: "booking.durations.min180", categoryKey: "booking.categories.beauty" },
+  { nameKey: "booking.services.combineBrows", price: 7000, durationKey: "booking.durations.min200", categoryKey: "booking.categories.beauty" },
+  { nameKey: "booking.services.browTouchUp", price: 4500, durationKey: "booking.durations.min90", categoryKey: "booking.categories.beauty" },
+  { nameKey: "booking.services.lipNeutralisation", price: 5000, durationKey: "booking.durations.min120", categoryKey: "booking.categories.beauty" },
+  { nameKey: "booking.services.lipTouchUp", price: 2500, durationKey: "booking.durations.min75", categoryKey: "booking.categories.beauty" },
+  { nameKey: "booking.services.permanentEyeliner", price: 5000, durationKey: "booking.durations.min90", categoryKey: "booking.categories.beauty" },
+  { nameKey: "booking.services.permanentEyelinerUpperLower", price: 9000, durationKey: "booking.durations.min150", categoryKey: "booking.categories.beauty" },
+  { nameKey: "booking.services.eyelinerTouchUp", price: 2500, durationKey: "booking.durations.min75", categoryKey: "booking.categories.beauty", priceNoteKey: "booking.from" },
+  { nameKey: "booking.services.hydraFacial", price: 2000, durationKey: "booking.durations.min60", categoryKey: "booking.categories.skin" },
+  { nameKey: "booking.services.koreanBbglow", price: 2500, durationKey: "booking.durations.min75", categoryKey: "booking.categories.skin" },
+  { nameKey: "booking.services.hydraBbglowCombo", price: 4000, durationKey: "booking.durations.min120", categoryKey: "booking.categories.skin" },
+  { nameKey: "booking.services.signatureFacial", price: 3000, durationKey: "booking.durations.min90", categoryKey: "booking.categories.skin" },
+  { nameKey: "booking.services.underarmLaser", price: 1000, durationKey: "booking.durations.min30", categoryKey: "booking.categories.laser" },
+  { nameKey: "booking.services.bikiniLaser", price: 2000, durationKey: "booking.durations.min45", categoryKey: "booking.categories.laser" },
+  { nameKey: "booking.services.fullLegLaser", price: 2000, durationKey: "booking.durations.min90", categoryKey: "booking.categories.laser" },
+  { nameKey: "booking.services.halfLegLaser", price: 1500, durationKey: "booking.durations.min60", categoryKey: "booking.categories.laser" },
+  { nameKey: "booking.services.fullArmLaser", price: 1500, durationKey: "booking.durations.min60", categoryKey: "booking.categories.laser" },
+  { nameKey: "booking.services.fullFaceLaser", price: 1500, durationKey: "booking.durations.min45", categoryKey: "booking.categories.laser" },
+  { nameKey: "booking.services.fullBackLaser", price: 2000, durationKey: "booking.durations.min75", categoryKey: "booking.categories.laser" },
+  { nameKey: "booking.services.stomachLaser", price: 2000, durationKey: "booking.durations.min45", categoryKey: "booking.categories.laser" },
+  { nameKey: "booking.services.upperLipLaser", price: 900, durationKey: "booking.durations.min15", categoryKey: "booking.categories.laser" },
+  { nameKey: "booking.services.fullBodyLaser", price: 12999, durationKey: "booking.durations.min240", categoryKey: "booking.categories.laser" },
+  { nameKey: "booking.services.softGelExtension", price: 1500, durationKey: "booking.durations.min90", categoryKey: "booking.categories.nails" },
+  { nameKey: "booking.services.acrylicExtension", price: 1800, durationKey: "booking.durations.min120", categoryKey: "booking.categories.nails" },
+  { nameKey: "booking.services.douyinNailExtension", price: 2500, durationKey: "booking.durations.min150", categoryKey: "booking.categories.nails", priceNoteKey: "booking.starting" },
+  { nameKey: "booking.services.gelPolish", price: 500, durationKey: "booking.durations.min45", categoryKey: "booking.categories.nails" },
+  { nameKey: "booking.services.classicCareManicure", price: 700, durationKey: "booking.durations.min60", categoryKey: "booking.categories.nails" },
+  { nameKey: "booking.services.royalKoreanManicure", price: 1500, durationKey: "booking.durations.min90", categoryKey: "booking.categories.nails" },
+  { nameKey: "booking.services.classicCarePedicure", price: 1000, durationKey: "booking.durations.min75", categoryKey: "booking.categories.nails" },
+  { nameKey: "booking.services.royalKoreanPedicure", price: 2000, durationKey: "booking.durations.min100", categoryKey: "booking.categories.nails" },
+  { nameKey: "booking.services.royalKoreanDuo", price: 3000, durationKey: "booking.durations.min180", categoryKey: "booking.categories.nails" },
+  { nameKey: "booking.services.gelRemove", price: 200, durationKey: "booking.durations.min30", categoryKey: "booking.categories.nails" },
+  { nameKey: "booking.services.nailArtAddons", price: 200, durationKey: "booking.durations.min15", categoryKey: "booking.categories.nails", priceNoteKey: "booking.starting" },
+  { nameKey: "booking.services.womenHairCut", price: 800, durationKey: "booking.durations.min60", categoryKey: "booking.categories.hair" },
+  { nameKey: "booking.services.menHairCut", price: 500, durationKey: "booking.durations.min45", categoryKey: "booking.categories.hair" },
+  { nameKey: "booking.services.hairWash", price: 300, durationKey: "booking.durations.min30", categoryKey: "booking.categories.hair" },
+  { nameKey: "booking.services.hairWashStyle", price: 700, durationKey: "booking.durations.min60", categoryKey: "booking.categories.hair" },
+  { nameKey: "booking.services.hairPerming", price: 2500, durationKey: "booking.durations.min180", categoryKey: "booking.categories.hair", priceNoteKey: "booking.starting" },
+  { nameKey: "booking.services.hairStraightening", price: 3000, durationKey: "booking.durations.min240", categoryKey: "booking.categories.hair", priceNoteKey: "booking.starting" },
+  { nameKey: "booking.services.hairColouring", price: 3500, durationKey: "booking.durations.min180", categoryKey: "booking.categories.hair", priceNoteKey: "booking.starting" },
+  { nameKey: "booking.services.hairHighlight", price: 4000, durationKey: "booking.durations.min240", categoryKey: "booking.categories.hair", priceNoteKey: "booking.starting" },
+  { nameKey: "booking.services.hairExtension", price: 1499, durationKey: "booking.durations.min120", categoryKey: "booking.categories.hair", priceNoteKey: "booking.starting" },
+  { nameKey: "booking.services.hairSpa", price: 1500, durationKey: "booking.durations.min90", categoryKey: "booking.categories.hair", priceNoteKey: "booking.starting" },
+  { nameKey: "booking.services.keratinTreatment", price: 3000, durationKey: "booking.durations.min240", categoryKey: "booking.categories.hair", priceNoteKey: "booking.starting" }
 ];
 
 const timeSlots = [
@@ -83,6 +71,7 @@ const timeSlots = [
 ];
 
 export default function BookingModal({ isOpen, onClose, initialService }) {
+  const { t, language } = useLanguage();
   const [formData, setFormData] = useState({
     client_name: "",
     email: "",
@@ -100,8 +89,8 @@ export default function BookingModal({ isOpen, onClose, initialService }) {
   useEffect(() => {
     if (isOpen) {
       if (initialService) {
-        setFormData(prev => ({ ...prev, service: initialService.name }));
-        setStep(2); // Skip service selection
+        setFormData((prev) => ({ ...prev, service: t(initialService.nameKey) }));
+        setStep(2);
       } else {
         resetForm();
       }
@@ -109,49 +98,48 @@ export default function BookingModal({ isOpen, onClose, initialService }) {
     }
   }, [isOpen, initialService]);
 
-  const selectedService = services.find(s => s.name === formData.service);
+  const selectedService = services.find((s) => t(s.nameKey) === formData.service);
 
   const handleInputChange = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-    if (error) setError(""); // Clear error when user starts typing
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    if (error) setError("");
   };
 
   const validateForm = () => {
     const { client_name, email, phone, service, preferred_date, preferred_time } = formData;
-    
-    if (!client_name.trim()) return "Please enter your full name";
-    if (!email.trim()) return "Please enter your email address";
-    if (!email.includes("@")) return "Please enter a valid email address";
-    if (!phone.trim()) return "Please enter your phone number";
-    if (!service) return "Please select a service";
-    if (!preferred_date) return "Please select your preferred date";
-    if (!preferred_time) return "Please select your preferred time";
-    
-    // Check if date is not in the past
+
+    if (!client_name.trim()) return t("booking.errors.nameRequired");
+    if (!email.trim()) return t("booking.errors.emailRequired");
+    if (!email.includes("@")) return t("booking.errors.emailInvalid");
+    if (!phone.trim()) return t("booking.errors.phoneRequired");
+    if (!service) return t("booking.errors.serviceRequired");
+    if (!preferred_date) return t("booking.errors.dateRequired");
+    if (!preferred_time) return t("booking.errors.timeRequired");
+
     const selectedDate = new Date(preferred_date);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    
+
     if (selectedDate < today) {
-      return "Please select a future date";
+      return t("booking.errors.pastDate");
     }
-    
+
     return null;
   };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-IN', { 
-      weekday: 'long', 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    return date.toLocaleDateString(language === "ar" ? "ar-SA" : "en-IN", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric"
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const validationError = validateForm();
     if (validationError) {
       setError(validationError);
@@ -162,36 +150,31 @@ export default function BookingModal({ isOpen, onClose, initialService }) {
     setError("");
 
     try {
-      // Step 1: Create appointment record in the database
       const appointmentData = {
         ...formData,
         service_price: selectedService?.price,
-        duration: selectedService?.duration,
-        status: "confirmed"
+        duration: selectedService?.durationKey ? t(selectedService.durationKey) : "",
+        status: "confirmed" as const
       };
 
       const appointment = await Appointment.create(appointmentData);
       setCreatedAppointment(appointment);
 
-      // Step 2: Create internal notification for salon management
       try {
         await createInternalNotification(appointment, formData, selectedService);
       } catch (notificationError) {
-        console.error('Internal notification creation failed:', notificationError);
-        // Don't block the user flow for this
+        console.error("Internal notification creation failed:", notificationError);
       }
 
-      // Step 3: Show success to user
       setStep(3);
     } catch (error) {
-      console.error('Booking submission failed:', error);
-      setError('A technical error occurred while submitting your booking. Please try again or call us directly at +91 98765 43210.');
+      console.error("Booking submission failed:", error);
+      setError(t("booking.errors.submit"));
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // Create internal notification instead of sending external emails
   const createInternalNotification = async (appointment, formData, selectedService) => {
     const notificationData = {
       booking_id: appointment.id,
@@ -204,8 +187,8 @@ export default function BookingModal({ isOpen, onClose, initialService }) {
       appointment_date: formData.preferred_date,
       appointment_time: formData.preferred_time,
       special_requests: formData.message || "",
-      notification_status: "pending",
-      priority: "normal"
+      notification_status: "pending" as const,
+      priority: "normal" as const
     };
 
     await BookingNotification.create(notificationData);
@@ -237,84 +220,87 @@ export default function BookingModal({ isOpen, onClose, initialService }) {
   const getTomorrowDate = () => {
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
-    return tomorrow.toISOString().split('T')[0];
+    return tomorrow.toISOString().split("T")[0];
   };
 
   const downloadBookingDetails = () => {
-    const bookingDetails = `
-════════════════════════════════════════════════════
-           S E R E N I T Y   S P A   &   S A L O N
-════════════════════════════════════════════════════
+    const serviceLabel = formData.service || t("booking.services.unknown");
+    const durationLabel = selectedService?.durationKey ? t(selectedService.durationKey) : "";
+    const investmentLabel = selectedService ? `SAR ${selectedService.price.toLocaleString("en-IN")}` : "";
+    const dateLabel = createdAppointment?.preferred_date ? formatDate(createdAppointment.preferred_date) : "";
+    const timeLabel = createdAppointment?.preferred_time || "";
+    const specialNotes = formData.message || t("booking.noneSpecified");
 
-                ** BOOKING CONFIRMATION **
+    const bookingDetails = `${t("booking.confirmation.separator")}
+           LYA SPA & SALON
+${t("booking.confirmation.separator")}
 
-        We are delighted to confirm your upcoming
-        appointment. We look forward to welcoming you.
+                ** ${t("booking.confirmation.heading")} **
 
-════════════════════════════════════════════════════
-Booking Reference: ${createdAppointment?.id}
-Confirmation Date: ${new Date().toLocaleString('en-IN', { 
-  dateStyle: 'full', 
-  timeStyle: 'short' 
+        ${t("booking.confirmation.line1")}
+        ${t("booking.confirmation.line2")}
+
+${t("booking.confirmation.separator")}
+${t("booking.confirmation.bookingReference")} ${createdAppointment?.id}
+${t("booking.confirmation.confirmationDate")} ${new Date().toLocaleString(language === "ar" ? "ar-SA" : "en-IN", {
+  dateStyle: "full",
+  timeStyle: "short"
 })}
-════════════════════════════════════════════════════
+${t("booking.confirmation.separator")}
 
-CLIENT INFORMATION:
+${t("booking.confirmation.clientHeading")}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Name:          ${formData.client_name}
-Email:         ${formData.email}
-Phone:         ${formData.phone}
+${t("booking.confirmation.name")}          ${formData.client_name}
+${t("booking.confirmation.email")}         ${formData.email}
+${t("booking.confirmation.phone")}         ${formData.phone}
 
-APPOINTMENT DETAILS:
+${t("booking.confirmation.appointmentHeading")}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Service:       ${createdAppointment?.service}
-Investment:    ₹${selectedService?.price.toLocaleString('en-IN')}
-Duration:      ${selectedService?.duration}
-Date:          ${formatDate(createdAppointment?.preferred_date)}
-Time:          ${createdAppointment?.preferred_time}
-Special Notes: ${formData.message || 'None specified'}
+${t("booking.confirmation.service")}       ${serviceLabel}
+${t("booking.confirmation.investment")}    ${investmentLabel}
+${t("booking.confirmation.duration")}      ${durationLabel}
+${t("booking.confirmation.date")}          ${dateLabel}
+${t("booking.confirmation.time")}          ${timeLabel}
+${t("booking.confirmation.specialNotes")} ${specialNotes}
 
-════════════════════════════════════════════════════
-                   IMPORTANT INSTRUCTIONS
-════════════════════════════════════════════════════
+${t("booking.confirmation.separator")}
+                   ${t("booking.confirmation.instructionsHeading")}
+${t("booking.confirmation.separator")}
 
-✓ Please arrive 10 minutes prior to your scheduled 
-  appointment time for a seamless experience.
+✓ ${t("booking.confirmation.instruction1")}
+  ${t("booking.confirmation.instruction1b")}
 
-✓ This confirmation document MUST be presented at 
-  reception upon arrival (digital copy acceptable).
+✓ ${t("booking.confirmation.instruction2")}
+  ${t("booking.confirmation.instruction2b")}
 
-✓ Please bring a valid government-issued photo ID.
+✓ ${t("booking.confirmation.instruction3")}
 
-✓ For any changes or cancellations, please contact 
-  us at least 24 hours in advance.
+✓ ${t("booking.confirmation.instruction4")}
+  ${t("booking.confirmation.instruction4b")}
 
-════════════════════════════════════════════════════
-                      FIND US AT:
-════════════════════════════════════════════════════
-Address:   P-145, Sector A, Metropolitan Co-operative 
-           Housing Society Limited,  
-            , West Bengal 700105
+${t("booking.confirmation.separator")}
+                      ${t("booking.confirmation.findUsHeading")}
+${t("booking.confirmation.separator")}
+${t("booking.confirmation.address")}
+${t("booking.confirmation.phoneLine")}     +966 533058022
+${t("booking.confirmation.emailLine")}     info@lyaspa.riyadh
+${t("booking.confirmation.websiteLine")}
 
-Phone:     +91 98765 43210
-Email:     info@serenitysalon.in
-Website:   www.serenitysalon.com
+${t("booking.confirmation.operatingHeading")}
+${t("booking.confirmation.weekdayHours")}
+${t("booking.confirmation.fridayHours")}
+${t("booking.confirmation.saturdayHours")}
 
-Operating Hours:
-Monday - Saturday: 9:00 AM - 8:00 PM
-Sunday: 10:00 AM - 6:00 PM
-
-════════════════════════════════════════════════════
-Thank you for choosing SERENITY. We look forward to 
-providing you with an exceptional wellness experience.
-════════════════════════════════════════════════════
+${t("booking.confirmation.separator")}
+${t("booking.confirmation.thankYou")}
+${t("booking.confirmation.separator")}
 `;
 
-    const blob = new Blob([bookingDetails], { type: 'text/plain;charset=utf-8' });
+    const blob = new Blob([bookingDetails], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
-    a.download = `SERENITY_Appointment_Confirmation_${createdAppointment?.id}.txt`;
+    a.download = `LYA_Appointment_Confirmation_${createdAppointment?.id}.txt`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -339,12 +325,11 @@ providing you with an exceptional wellness experience.
             className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header */}
             <div className="sticky top-0 bg-white rounded-t-3xl border-b border-gray-100 p-6 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <Sparkles className="w-6 h-6 text-[#C8A882]" />
                 <h2 className="font-serif text-2xl font-bold text-[#0F0F0F]">
-                  Book Your Appointment
+                  {t("booking.title")}
                 </h2>
               </div>
               <button
@@ -356,7 +341,6 @@ providing you with an exceptional wellness experience.
             </div>
 
             <div className="p-6">
-              {/* Error Message */}
               {error && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
@@ -374,39 +358,46 @@ providing you with an exceptional wellness experience.
                   className="space-y-6"
                 >
                   <div className="text-center mb-8">
-                    <p className="text-gray-600">Step 1 of 2: Select Your Service</p>
+                    <p className="text-gray-600">{t("booking.step1")}</p>
                   </div>
 
                   <div className="grid gap-4 max-h-96 overflow-y-auto">
-                    {services.map((service) => (
-                      <div
-                        key={service.name}
-                        onClick={() => {
-                          handleInputChange('service', service.name);
-                          setStep(2);
-                        }}
-                        className={`p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 hover:shadow-md ${
-                          formData.service === service.name
-                            ? 'border-[#C8A882] bg-[#C8A882]/5'
-                            : 'border-gray-200 hover:border-[#C8A882]/50'
-                        }`}
-                      >
-                        <div className="flex justify-between items-center">
-                          <div>
-                            <h3 className="font-serif text-lg font-semibold text-[#0F0F0F]">
-                              {service.name}
-                            </h3>
-                            <p className="text-sm text-gray-500">{service.duration}</p>
-                          </div>
-                          <div className="text-right">
-                            <p className="font-serif text-xl font-bold text-[#C8A882]">
-                              ₹{service.price.toLocaleString('en-IN')}
-                              {service.priceNote && <span className="text-xs text-gray-600 ml-1">{service.priceNote}</span>}
-                            </p>
+                    {services.map((service) => {
+                      const label = t(service.nameKey);
+                      const durationLabel = service.durationKey ? t(service.durationKey) : "";
+                      const categoryLabel = service.categoryKey ? t(service.categoryKey) : "";
+                      const priceNote = service.priceNoteKey ? t(service.priceNoteKey) : "";
+
+                      return (
+                        <div
+                          key={label}
+                          onClick={() => {
+                            handleInputChange("service", label);
+                            setStep(2);
+                          }}
+                          className={`p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 hover:shadow-md ${
+                            formData.service === label
+                              ? "border-[#C8A882] bg-[#C8A882]/5"
+                              : "border-gray-200 hover:border-[#C8A882]/50"
+                          }`}
+                        >
+                          <div className="flex justify-between items-center">
+                            <div>
+                              <h3 className="font-serif text-lg font-semibold text-[#0F0F0F]">
+                                {label}
+                              </h3>
+                              <p className="text-sm text-gray-500">{durationLabel}</p>
+                            </div>
+                            <div className="text-right">
+                              <p className="font-serif text-xl font-bold text-[#C8A882]">
+                                SAR {service.price.toLocaleString("en-IN")}
+                                {priceNote && <span className="text-xs text-gray-600 ml-1">{priceNote}</span>}
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </motion.div>
               )}
@@ -418,13 +409,13 @@ providing you with an exceptional wellness experience.
                   className="space-y-6"
                 >
                   <div className="text-center mb-8">
-                    <p className="text-gray-600">Step 2 of 2: Your Details</p>
+                    <p className="text-gray-600">{t("booking.step2")}</p>
                     <div className="mt-4 p-4 bg-[#C8A882]/5 rounded-xl">
                       <p className="font-serif text-lg text-[#0F0F0F]">
-                        {formData.service} - ₹{selectedService?.price.toLocaleString('en-IN')}
-                        {selectedService?.priceNote && <span className="text-sm text-gray-600 ml-1">{selectedService.priceNote}</span>}
+                        {formData.service} - SAR {selectedService?.price.toLocaleString("en-IN")}
+                        {selectedService?.priceNoteKey && <span className="text-sm text-gray-600 ml-1">{t(selectedService.priceNoteKey)}</span>}
                       </p>
-                      <p className="text-sm text-gray-600">{selectedService?.duration}</p>
+                      <p className="text-sm text-gray-600">{selectedService?.durationKey ? t(selectedService.durationKey) : ""}</p>
                     </div>
                   </div>
 
@@ -433,29 +424,29 @@ providing you with an exceptional wellness experience.
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           <User className="w-4 h-4 inline mr-2" />
-                          Full Name *
+                          {t("booking.form.fullName")}
                         </label>
                         <input
                           type="text"
                           required
                           value={formData.client_name}
-                          onChange={(e) => handleInputChange('client_name', e.target.value)}
+                          onChange={(e) => handleInputChange("client_name", e.target.value)}
                           className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-[#C8A882] transition-colors duration-300"
-                          placeholder="Your full name"
+                          placeholder={t("booking.form.fullNamePlaceholder")}
                         />
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           <Mail className="w-4 h-4 inline mr-2" />
-                          Email Address *
+                          {t("booking.form.email")}
                         </label>
                         <input
                           type="email"
                           required
                           value={formData.email}
-                          onChange={(e) => handleInputChange('email', e.target.value)}
+                          onChange={(e) => handleInputChange("email", e.target.value)}
                           className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-[#C8A882] transition-colors duration-300"
-                          placeholder="your@email.com"
+                          placeholder={t("booking.form.emailPlaceholder")}
                         />
                       </div>
                     </div>
@@ -463,15 +454,15 @@ providing you with an exceptional wellness experience.
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         <Phone className="w-4 h-4 inline mr-2" />
-                        Phone Number *
+                        {t("booking.form.phone")}
                       </label>
                       <input
                         type="tel"
                         required
                         value={formData.phone}
-                        onChange={(e) => handleInputChange('phone', e.target.value)}
+                        onChange={(e) => handleInputChange("phone", e.target.value)}
                         className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-[#C8A882] transition-colors duration-300"
-                        placeholder="+91 98765 43210"
+                        placeholder={t("booking.form.phonePlaceholder")}
                       />
                     </div>
 
@@ -479,13 +470,13 @@ providing you with an exceptional wellness experience.
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           <Calendar className="w-4 h-4 inline mr-2" />
-                          Preferred Date *
+                          {t("booking.form.preferredDate")}
                         </label>
                         <input
                           type="date"
                           required
                           value={formData.preferred_date}
-                          onChange={(e) => handleInputChange('preferred_date', e.target.value)}
+                          onChange={(e) => handleInputChange("preferred_date", e.target.value)}
                           min={getTomorrowDate()}
                           className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-[#C8A882] transition-colors duration-300"
                         />
@@ -493,15 +484,15 @@ providing you with an exceptional wellness experience.
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           <Clock className="w-4 h-4 inline mr-2" />
-                          Preferred Time *
+                          {t("booking.form.preferredTime")}
                         </label>
                         <select
                           required
                           value={formData.preferred_time}
-                          onChange={(e) => handleInputChange('preferred_time', e.target.value)}
+                          onChange={(e) => handleInputChange("preferred_time", e.target.value)}
                           className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-[#C8A882] transition-colors duration-300"
                         >
-                          <option value="">Select time</option>
+                          <option value="">{t("booking.form.selectTime")}</option>
                           {timeSlots.map((time) => (
                             <option key={time} value={time}>{time}</option>
                           ))}
@@ -512,14 +503,14 @@ providing you with an exceptional wellness experience.
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         <MessageSquare className="w-4 h-4 inline mr-2" />
-                        Special Requests (Optional)
+                        {t("booking.form.specialRequests")}
                       </label>
                       <textarea
                         value={formData.message}
-                        onChange={(e) => handleInputChange('message', e.target.value)}
+                        onChange={(e) => handleInputChange("message", e.target.value)}
                         rows={3}
                         className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-[#C8A882] transition-colors duration-300 resize-none"
-                        placeholder="Any special requests or preferences..."
+                        placeholder={t("booking.form.specialRequestsPlaceholder")}
                       />
                     </div>
 
@@ -529,7 +520,7 @@ providing you with an exceptional wellness experience.
                         onClick={() => setStep(1)}
                         className="flex-1 py-3 px-6 border border-gray-300 rounded-xl font-sans font-medium text-gray-700 hover:bg-gray-50 transition-colors duration-300"
                       >
-                        Back
+                        {t("booking.back")}
                       </button>
                       <button
                         type="submit"
@@ -539,10 +530,10 @@ providing you with an exceptional wellness experience.
                         {isSubmitting ? (
                           <>
                             <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                            Confirming Booking...
+                            {t("booking.confirming")}
                           </>
                         ) : (
-                          'Confirm Booking'
+                          t("booking.confirm")
                         )}
                       </button>
                     </div>
@@ -559,103 +550,98 @@ providing you with an exceptional wellness experience.
                   <div className="w-16 h-16 md:w-20 md:h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto">
                     <Check className="w-8 h-8 md:w-10 md:h-10 text-green-600" />
                   </div>
-                  
+
                   <div>
                     <h3 className="font-serif text-2xl md:text-3xl font-bold text-[#0F0F0F] mb-2">
-                      Booking Confirmed!
+                      {t("booking.confirmed")}
                     </h3>
                     <p className="text-gray-600 px-2">
-                      Thank you, {formData.client_name}. We look forward to seeing you.
+                      {t("booking.confirmedMessage", "", { name: formData.client_name })}
                     </p>
                   </div>
 
-                  {/* Professional Booking Summary Card */}
                   <div className="bg-gradient-to-br from-[#C8A882]/10 to-[#FF5C8D]/10 rounded-2xl p-4 md:p-6 text-left border-2 border-[#C8A882]/30 mx-auto max-w-lg shadow-lg">
                     <div className="text-center mb-4">
                       <h4 className="font-serif text-xl font-bold text-[#0F0F0F] mb-1">
-                        📋 APPOINTMENT CONFIRMATION
+                        {t("booking.confirmation.cardHeading")}
                       </h4>
                       <div className="w-16 h-0.5 bg-[#C8A882] mx-auto"></div>
                     </div>
-                    
+
                     <div className="space-y-3 text-sm">
                       <div className="bg-white/70 rounded-lg p-3">
                         <div className="flex justify-between items-center mb-2">
-                          <strong className="text-gray-700">Booking Reference:</strong>
+                          <strong className="text-gray-700">{t("booking.confirmation.reference")}</strong>
                           <span className="text-[#FF5C8D] font-bold font-mono text-xs bg-[#FF5C8D]/10 px-2 py-1 rounded">
                             #{createdAppointment?.id?.slice(-8)?.toUpperCase()}
                           </span>
                         </div>
                         <div className="w-full h-[1px] bg-[#C8A882]/30 mb-2"></div>
-                        
+
                         <div className="flex justify-between items-start mb-2">
-                          <strong className="text-gray-700">Service:</strong>
+                          <strong className="text-gray-700">{t("booking.confirmation.service")}</strong>
                           <span className="text-right pl-2 font-medium">{createdAppointment?.service}</span>
                         </div>
-                        
+
                         <div className="flex justify-between items-center mb-2">
-                          <strong className="text-gray-700">Investment:</strong>
-                          <span className="text-[#C8A882] font-bold text-lg">₹{selectedService?.price.toLocaleString('en-IN')}</span>
+                          <strong className="text-gray-700">{t("booking.confirmation.investment")}</strong>
+                          <span className="text-[#C8A882] font-bold text-lg">SAR {selectedService?.price.toLocaleString("en-IN")}</span>
                         </div>
-                        
+
                         <div className="flex justify-between items-center mb-2">
-                          <strong className="text-gray-700">Duration:</strong>
-                          <span className="font-medium">{selectedService?.duration}</span>
+                          <strong className="text-gray-700">{t("booking.confirmation.duration")}</strong>
+                          <span className="font-medium">{selectedService?.durationKey ? t(selectedService.durationKey) : ""}</span>
                         </div>
-                        
+
                         <div className="w-full h-[1px] bg-[#C8A882]/30 mb-2"></div>
-                        
+
                         <div className="flex justify-between items-center mb-2">
-                          <strong className="text-gray-700">Date:</strong>
+                          <strong className="text-gray-700">{t("booking.confirmation.date")}</strong>
                           <span className="text-right pl-2 font-medium">{formatDate(createdAppointment?.preferred_date)}</span>
                         </div>
-                        
+
                         <div className="flex justify-between items-center">
-                          <strong className="text-gray-700">Time:</strong>
+                          <strong className="text-gray-700">{t("booking.confirmation.time")}</strong>
                           <span className="font-bold text-lg">{createdAppointment?.preferred_time}</span>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Enhanced Screenshot Instructions */}
                   <div className="bg-gradient-to-r from-orange-50 to-red-50 border-l-4 border-orange-400 p-4 rounded-lg mx-auto max-w-lg shadow-sm">
                     <div className="flex items-start gap-3">
                       <Camera className="w-8 h-8 text-orange-500 flex-shrink-0 mt-1" />
                       <div className="text-left">
-                        <h5 className="font-bold text-orange-800 mb-2 text-base">📱 IMPORTANT: Save This Confirmation</h5>
+                        <h5 className="font-bold text-orange-800 mb-2 text-base">{t("booking.confirmation.saveHeading")}</h5>
                         <p className="text-sm text-orange-700 leading-relaxed">
-                          Please <strong>screenshot this page</strong> or download the confirmation document below. 
-                          You <strong>must present this</strong> at reception when you arrive for your appointment.
+                          {t("booking.confirmation.saveBody")}
                         </p>
                       </div>
                     </div>
                   </div>
 
-                  {/* Action Buttons */}
                   <div className="space-y-3 pt-4 px-4">
                     <button
                       onClick={downloadBookingDetails}
                       className="w-full py-3 md:py-4 px-6 bg-[#C8A882] text-white rounded-xl font-sans font-medium hover:bg-[#FF5C8D] transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl text-base"
                     >
                       <Download className="w-5 h-5" />
-                      Download Confirmation Document
+                      {t("booking.confirmation.download")}
                     </button>
 
                     <button
                       onClick={handleClose}
                       className="w-full py-3 px-6 bg-gray-100 text-gray-700 rounded-xl font-sans font-medium hover:bg-gray-200 transition-colors duration-300"
                     >
-                      Close
+                      {t("booking.close")}
                     </button>
                   </div>
 
-                  {/* Professional Footer */}
                   <div className="text-xs text-gray-500 pt-6 border-t border-gray-200 space-y-1">
-                    <p className="font-bold text-[#C8A882] text-sm">SERENITY Luxury Spa & Salon</p>
-                    <p>P-145, Sector A, Metropolitan C.H.S. Ltd.</p>
-                    <p> ,   700105 | +91 98765 43210</p>
-                    <p className="text-[#C8A882] font-medium">Operating Hours: Mon-Sat 9AM-8PM | Sun 10AM-6PM</p>
+                    <p className="font-bold text-[#C8A882] text-sm">LYA Spa & Salon</p>
+                    <p>Abdallah Ibn Soleiman Al Hamdani, Al Olaya, Riyadh</p>
+                    <p>+966 533058022 | info@lyaspa.riyadh</p>
+                    <p className="text-[#C8A882] font-medium">{t("contact.hours.weekdays")}</p>
                   </div>
                 </motion.div>
               )}

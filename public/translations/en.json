@@ -1,0 +1,508 @@
+{
+  "brand": {
+    "name": "LYA Spa & Salon",
+    "tagline": "A Tunisian spa experience in Riyadh",
+    "taglineAr": "رحلة سبا بتونسية في الرياض",
+    "taglineEn": "Tunisian Spa & Salon"
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "gallery": "Gallery",
+    "team": "Team",
+    "contact": "Contact",
+    "bookAppointment": "Book Appointment"
+  },
+  "home": {
+    "welcomeTitle": "LYA Spa & Salon",
+    "welcomeSubtitle": "A Tunisian spa experience in Riyadh",
+    "cta": "Book Appointment",
+    "explore": "Explore Services",
+    "heroHeadline": "LYA Spa & Salon",
+    "heroSubline": "A Tunisian spa experience in Riyadh",
+    "heroDescription": "Premium spa, salon, and wellness treatments in the heart of Olaya.",
+    "slide2Headline": "Our Services",
+    "slide2Subline": "Beauty & Wellness",
+    "slide2Description": "Massage, skincare, lashes, nails, and hair tailored to you.",
+    "slide3Headline": "Visit LYA",
+    "slide3Subline": "In Olaya, Riyadh",
+    "slide3Description": "Step into a clean, warm space built for real relaxation.",
+    "discover": "Discover LYA",
+    "trust1": "LYA Certified Therapists",
+    "trust2": "Premium LYA Services",
+    "trust3": "Located in Riyadh",
+    "urgency": {
+      "headline": "Limited Time Offer",
+      "detail": "Book today and receive a complimentary organic facial add-on."
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Explore our curated menu of premium spa, beauty, and wellness treatments at LYA Spa & Salon.",
+    "bookNow": "Book Now",
+    "from": "Starting from",
+    "duration": "Duration",
+    "price": "Price",
+    "currency": "SAR",
+    "categories": {
+      "all": "All Services",
+      "massage": "Massage Therapy",
+      "beauty": "Beauty Services",
+      "skin": "Skin",
+      "laser": "Laser Treatments",
+      "nails": "Nail Services",
+      "hair": "Hair Services"
+    },
+    "items": {
+      "swedishMassage": "Swedish Massage",
+      "swedishMassageDesc": "Indulge in a timeless classic at LYA Spa & Salon. Our Swedish Massage utilizes masterful, flowing strokes and gentle kneading to dissolve muscle tension.",
+      "tunisianHammam": "Tunisian Hammam",
+      "tunisianHammamDesc": "Experience an authentic Tunisian hammam ritual at LYA. Enjoy a traditional steam cleanse, gentle exfoliation, and rich nourishing rituals.",
+      "deepTissue": "Deep Tissue Massage",
+      "deepTissueDesc": "For those seeking powerful relief from chronic pain and muscle tightness, our Deep Tissue Massage is the definitive solution.",
+      "footMassage": "Foot Massage",
+      "footMassageDesc": "Revitalize your entire being from the ground up with our specialized Foot Massage. This ancient reflexology-based treatment targets key pressure points.",
+      "classicLash": "Classic Lash Extension",
+      "classicLashDesc": "Our Classic Lash Extension service meticulously applies one extension to one natural lash, creating a timeless, elegant enhancement.",
+      "volumeLash": "Volume Lash Extension",
+      "volumeLashDesc": "For maximum drama and fullness, our Volume Lash Extensions involve applying multiple lightweight fans to each natural lash.",
+      "lashLift": "Lash Lift",
+      "lashLiftDesc": "Elevate your natural beauty with a Lash Lift, the ultimate low-maintenance lash solution. This semi-permanent treatment curls your natural lashes from the root.",
+      "hydraFacial": "Hydra Facial",
+      "hydraFacialDesc": "Experience the ultimate skin detox with our Hydra Facial. This multi-step treatment cleanses, exfoliates, extracts impurities, and hydrates the skin.",
+      "signatureFacial": "Cece’s Signature Facial",
+      "signatureFacialDesc": "Indulge in our exclusive, bespoke facial curated by our senior therapist. This luxurious treatment is customized to your unique skin needs.",
+      "underarmLaser": "Underarm Laser",
+      "underarmLaserDesc": "Embrace the freedom of flawlessly smooth underarms with our advanced laser hair removal. Using state-of-the-art technology, we provide a safe and permanent solution.",
+      "fullLegLaser": "Full Leg Laser",
+      "fullLegLaserDesc": "Experience the luxury of permanently smooth, hair-free legs. Our Full Leg Laser treatment covers both legs from ankle to thigh.",
+      "koreanManicure": "Royal Korean Ritual Manicure",
+      "koreanManicureDesc": "An indulgent, multi-step manicure inspired by Korean beauty rituals. Includes deep exfoliation, a nourishing mask, extensive massage, and meticulous cuticle work.",
+      "koreanPedicure": "Royal Korean Ritual Pedicure",
+      "koreanPedicureDesc": "The ultimate pampering for your feet. This premium pedicure uses advanced Korean skincare techniques, including multi-level exfoliation and hydrating masks.",
+      "gelPolish": "Gel Polish",
+      "gelPolishDesc": "Enjoy weeks of flawless, chip-free colour with our premium Gel Polish service. We offer a vast selection of shades, all expertly applied and cured.",
+      "womenHair": "Women Hair Cut",
+      "womenHairDesc": "Transform your look with a bespoke Women's Hair Cut from our master stylists in Riyadh. Following a thorough consultation, we will craft a style that perfectly complements your face shape.",
+      "menHair": "Men Hair Cut",
+      "menHairDesc": "Experience the art of modern barbering with our expert Men's Hair Cut. Our stylists are skilled in both classic and contemporary techniques.",
+      "hairSpa": "Hair Spa",
+      "hairSpaDesc": "Indulge in a luxurious hair spa treatment designed to nourish, hydrate, and rejuvenate your hair using premium organic products."
+    }
+  },
+  "gallery": {
+    "pill": "Visual Journey",
+    "title": "LYA Spa & Salon Gallery",
+    "description": "Step inside LYA’s tranquil sanctuary and explore our luxurious spaces.",
+    "ready": "Ready to Experience LYA?",
+    "ctaText": "Book your appointment today and step into our world of luxury, wellness, and Mediterranean-inspired beauty in Riyadh.",
+    "ctaButton": "Schedule Your Visit"
+  },
+  "categories": {
+    "pill": "Our Expertise",
+    "title1": "Curated Wellness",
+    "title2": "Journeys",
+    "subtitle": "Explore our world of exclusive services, each designed to deliver profound results and a sense of deep tranquility.",
+    "cta": "Discover the Experience",
+    "items": {
+      "nail_polish": {
+        "title": "Artisanal Nail Care",
+        "description": "Impeccable manicures and pedicures featuring organic, long-lasting polishes."
+      },
+      "brow_polish": {
+        "title": "Brow Sculpting",
+        "description": "Expert shaping and tinting to perfectly frame your features with master precision."
+      },
+      "hair_dresser": {
+        "title": "Signature Hairstyling",
+        "description": "Transform your look with our master stylists, using only the finest organic hair care."
+      },
+      "foot_massage": {
+        "title": "Restorative Massage",
+        "description": "Melt away tension with therapeutic techniques designed for deep relaxation."
+      },
+      "cosmetics": {
+        "title": "Radiant Skincare",
+        "description": "Revitalize your skin with bespoke facials and premium, pure ingredients."
+      }
+    }
+  },
+  "product": {
+    "title1": "Purely Potent, Naturally",
+    "title2": "Our Product Philosophy",
+    "intro": "At LYA, we use quality-focused, clean beauty choices for premium treatments. Our product philosophy is built on safe, effective, and reliable ingredients.",
+    "items": {
+      "crueltyFree": "Cruelty Free",
+      "sulfateFree": "Sulfate Free",
+      "organic": "Organic",
+      "labTested": "Lab Tested",
+      "noSls": "No SLS",
+      "noSilicon": "No Silicon",
+      "noAlcohol": "No Alcohol"
+    }
+  },
+  "promo": {
+    "headline": "LYA Membership",
+    "subtitle": "A curated Tunisian-inspired spa membership in Riyadh.",
+    "detail": "Enjoy priority booking, exclusive offers, and premium care."
+  },
+  "what": {
+    "pill": "Our Services",
+    "headline1": "What We Do",
+    "headline2": "for You",
+    "intro": "We deliver Tunisian spa rituals and premium salon services in Riyadh.",
+    "title1": "Tunisian Spa Rituals",
+    "desc1": "Hammam and massage treatments inspired by Tunisian wellness traditions.",
+    "title2": "Premium Salon Care",
+    "desc2": "Hair, nails, lashes, and skincare in one refined space.",
+    "title3": "Clean & Safe Space",
+    "desc3": "Hygiene-first service with trained therapists and quality products.",
+    "title4": "Personalized Service",
+    "desc4": "Every visit is tailored to your mood, skin, and style.",
+    "cta": "Book an Appointment"
+  },
+  "team": {
+    "heroPill": "The Heart of LYA",
+    "title": "Our Team",
+    "subtitle": "Meet the certified professionals dedicated to your transformation at LYA Spa & Salon.",
+    "philosophyTitle": "Our Philosophy in Practice",
+    "pillars": {
+      "tunisianTitle": "Tunisian Spa Precision",
+      "tunisianDesc": "We blend traditional Tunisian beauty rituals with modern spa technology for safe, refined, and memorable results.",
+      "restorativeTitle": "Restorative Beauty",
+      "restorativeDesc": "From organic skincare to luxurious hair and nail rituals, every service is designed to enhance your natural beauty.",
+      "riyadhTitle": "Riyadh's Distinctive Spa Destination",
+      "riyadhDesc": "A curated Tunisian-inspired beauty house in Olaya, built around quality products, skilled therapists, and warm hospitality."
+    }
+  },
+  "contact": {
+    "pill": "Get In Touch",
+    "title": "Contact LYA Spa & Salon",
+    "subtitle": "Visit us in Olaya, Riyadh for a Mediterranean-inspired spa and salon experience.",
+    "visitTitle": "Visit LYA",
+    "callTitle": "Call Us",
+    "hoursTitle": "Opening Hours",
+    "followTitle": "Follow Us",
+    "address": "Olaya, Riyadh, Saudi Arabia",
+    "phone": "+966 55 000 0000",
+    "email": "info@lya.sa",
+    "form": {
+      "title": "Book an Enquiry",
+      "firstName": "First Name",
+      "firstNamePlaceholder": "Your first name",
+      "lastName": "Last Name",
+      "lastNamePlaceholder": "Your last name",
+      "email": "Email Address",
+      "emailPlaceholder": "your@email.com",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+966 53 305 8022",
+      "service": "Interested Service",
+      "servicePlaceholder": "Select a service",
+      "message": "Message",
+      "messagePlaceholder": "Tell us about your beauty goals...",
+      "send": "Send Message"
+    },
+    "hours": {
+      "weekdays": "Monday - Thursday: 10:00 AM - 8:00 PM",
+      "friday": "Friday: 4:00 PM - 8:00 PM",
+      "saturday": "Saturday: 9:00 AM - 7:00 PM"
+    },
+    "social": {
+      "instagram": "Instagram",
+      "fresha": "Fresha"
+    }
+  },
+  "footer": {
+    "rights": "© 2024 LYA Spa & Salon. All rights reserved.",
+    "newsletterTitle": "Luxury Updates",
+    "newsletterDesc": "Subscribe for exclusive offers and premium wellness insights.",
+    "subscribe": "Subscribe",
+    "servicesTitle": "Premium Services",
+    "visitTitle": "Visit LYA",
+    "sitemap": "Sitemap",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "brandDescriptionEn": "LYA is Riyadh's distinctive Tunisian-inspired spa destination. Enjoy a refined experience with our skilled team and premium services.",
+    "brandDescriptionAr": "وجهتك الفاخرة للسبا في الرياض. استمتعي بتجربة فريدة مع فريقنا الماهر والخدمات المتميزة.",
+    "brandTaglineEn": "Tunisian Spa & Salon",
+    "brandTaglineAr": "رحلة سبا بتونسية في الرياض",
+    "services": {
+      "luxuryHairStyling": "Luxury Hair Styling",
+      "advancedSkincare": "Advanced Skincare",
+      "therapeuticMassage": "Therapeutic Massage",
+      "premiumNailCare": "Premium Nail Care",
+      "wellnessTreatments": "Wellness Treatments"
+    },
+    "newsletter": {
+      "placeholder": "Your email"
+    },
+    "bottomBranding": "{name} — Tunisian Spa & Salon"
+  },
+  "booking": {
+    "title": "Book Your Appointment",
+    "step1": "Step 1 of 2: Select Your Service",
+    "step2": "Step 2 of 2: Your Details",
+    "back": "Back",
+    "confirm": "Confirm Booking",
+    "confirming": "Confirming Booking...",
+    "errors": {
+      "nameRequired": "Please enter your full name",
+      "emailRequired": "Please enter your email address",
+      "emailInvalid": "Please enter a valid email address",
+      "phoneRequired": "Please enter your phone number",
+      "serviceRequired": "Please select a service",
+      "dateRequired": "Please select your preferred date",
+      "timeRequired": "Please select your preferred time",
+      "pastDate": "Please select a future date",
+      "submit": "A technical error occurred while submitting your booking. Please try again or call us directly at +966 533058022."
+    },
+    "noneSpecified": "None specified",
+    "confirmed": "Booking Confirmed!",
+    "confirmedMessage": "Thank you, {name}. We look forward to seeing you.",
+    "close": "Close",
+    "services": {
+      "swedishMassage": "Swedish Massage",
+      "tunisianHammam": "Tunisian Hammam",
+      "thaiDryMassage": "Thai Dry Massage",
+      "footMassage": "Foot Massage",
+      "headShoulderMassage": "Head and Shoulder Massage",
+      "deepTissue": "Deep Tissue Massage",
+      "classicLash": "Classic Lash Extension",
+      "hybridLash": "Hybrid Lash Extension",
+      "wispyLash": "Wispy Lash Extension",
+      "volumeLash": "Volume Lash Extension",
+      "lashLift": "Lash Lift",
+      "microblading": "Microblading",
+      "microshading": "Microshading",
+      "combineBrows": "Combine Brows",
+      "browTouchUp": "Brow Touch Up",
+      "lipNeutralisation": "Lip Neutralisation / Lip Blush",
+      "lipTouchUp": "Lip Touch Up",
+      "permanentEyeliner": "Permanent Eyeliner",
+      "permanentEyelinerUpperLower": "Permanent Eyeliner (Upper & Lower)",
+      "eyelinerTouchUp": "Eyeliner Touch Up",
+      "hydraFacial": "Hydra Facial",
+      "koreanBbglow": "Stayve Korean BBGlow",
+      "hydraBbglowCombo": "Hydra & BBGlow Combo",
+      "signatureFacial": "Cece’s Signature Facial",
+      "underarmLaser": "Underarm Laser",
+      "bikiniLaser": "Bikini Laser",
+      "fullLegLaser": "Full Leg Laser",
+      "halfLegLaser": "Half Leg Laser",
+      "fullArmLaser": "Full Arm Laser",
+      "fullFaceLaser": "Full Face Laser",
+      "fullBackLaser": "Full Back Laser",
+      "stomachLaser": "Stomach Laser",
+      "upperLipLaser": "Upper Lip Laser",
+      "fullBodyLaser": "Full Body Laser",
+      "softGelExtension": "Soft Gel Extension",
+      "acrylicExtension": "Acrylic Extension",
+      "douyinNailExtension": "Douyin Nail Extension",
+      "gelPolish": "Gel Polish",
+      "classicCareManicure": "Classic Care Manicure",
+      "royalKoreanManicure": "Royal Korean Ritual Manicure",
+      "classicCarePedicure": "Classic Care Pedicure",
+      "royalKoreanPedicure": "Royal Korean Ritual Pedicure",
+      "royalKoreanDuo": "Royal Korean Ritual Duo",
+      "gelRemove": "Gel Remove",
+      "nailArtAddons": "Nail Art / Add-Ons",
+      "womenHairCut": "Women Hair Cut",
+      "menHairCut": "Men Hair Cut",
+      "hairWash": "Hair Wash",
+      "hairWashStyle": "Hair Wash & Style",
+      "hairPerming": "Hair Perming",
+      "hairStraightening": "Hair Straightening",
+      "hairColouring": "Hair Colouring",
+      "hairHighlight": "Hair Highlight",
+      "hairExtension": "Hair Extension",
+      "hairSpa": "Hair Spa",
+      "keratinTreatment": "Keratin Treatment",
+      "unknown": "Selected service"
+    },
+    "durations": {
+      "min15": "15 min",
+      "min30": "30 min",
+      "min45": "45 min",
+      "min60": "60 min",
+      "min75": "75 min",
+      "min90": "90 min",
+      "min100": "100 min",
+      "min120": "120 min",
+      "min135": "135 min",
+      "min150": "150 min",
+      "min180": "180 min",
+      "min200": "200 min",
+      "min240": "240 min"
+    },
+    "categories": {
+      "massage": "Massage",
+      "beauty": "Beauty",
+      "skin": "Skin",
+      "laser": "Laser",
+      "nails": "Nails",
+      "hair": "Hair"
+    },
+    "from": "from",
+    "starting": "starting from",
+    "form": {
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Enter your full name",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+966 5X XXX XXXX",
+      "preferredDate": "Preferred Date",
+      "preferredTime": "Preferred Time",
+      "selectTime": "Select time",
+      "specialRequests": "Special Requests (Optional)",
+      "specialRequestsPlaceholder": "Any special requests or preferences...",
+      "message": "Message",
+      "messagePlaceholder": "Any special requests"
+    },
+    "confirmation": {
+      "separator": "----------------------------------------",
+      "heading": "APPOINTMENT CONFIRMED",
+      "line1": "LYA Spa & Salon - Tunisian Spa & Salon in Riyadh",
+      "line2": "Thank you for choosing LYA.",
+      "bookingReference": "Booking Reference:",
+      "confirmationDate": "Confirmed on:",
+      "clientHeading": "CLIENT DETAILS",
+      "name": "Name:",
+      "email": "Email:",
+      "phone": "Phone:",
+      "appointmentHeading": "APPOINTMENT DETAILS",
+      "service": "Service:",
+      "investment": "Investment:",
+      "duration": "Duration:",
+      "date": "Date:",
+      "time": "Time:",
+      "specialNotes": "Special Notes:",
+      "instructionsHeading": "INSTRUCTIONS",
+      "instruction1": "Please arrive 10 minutes before your appointment.",
+      "instruction1b": "Bring a valid ID for first-time visits.",
+      "instruction2": "Late arrivals may reduce treatment time.",
+      "instruction2b": "We recommend arriving relaxed and on time.",
+      "instruction3": "Cancellations should be made 24 hours in advance.",
+      "instruction4": "For questions, call or message us anytime.",
+      "instruction4b": "We are here to help before your visit.",
+      "findUsHeading": "FIND US",
+      "address": "Address: Olaya, Riyadh, Saudi Arabia",
+      "phoneLine": "Phone:",
+      "emailLine": "Email:",
+      "websiteLine": "Website: lya.spa",
+      "operatingHeading": "OPERATING HOURS",
+      "weekdayHours": "Mon-Thu: 10:00 AM - 8:00 PM",
+      "fridayHours": "Friday: 4:00 PM - 8:00 PM",
+      "saturdayHours": "Saturday: 9:00 AM - 7:00 PM",
+      "thankYou": "Thank you for booking with LYA.",
+      "saveHeading": "IMPORTANT: Save This Confirmation",
+      "saveBody": "Please screenshot this page or download the confirmation document below. You must present this at reception when you arrive for your appointment.",
+      "download": "Download Confirmation Document",
+      "instruction3b": "Contact us directly for urgent changes.",
+      "cardHeading": "Appointment Details",
+      "reference": "Booking Reference:"
+    }
+  },
+  "testimonials": {
+    "title": "Client Love",
+    "pill": "Real Experiences",
+    "clientAlt": "LYA client",
+    "items": {
+      "sunita": {
+        "name": "Sunita",
+        "role": "Regular Client",
+        "text": "LYA made my routine feel like a true escape."
+      },
+      "priya": {
+        "name": "Priya",
+        "role": "Beauty Subscriber",
+        "text": "The hammam ritual is exactly what I needed in Riyadh."
+      },
+      "anjali": {
+        "name": "Anjali",
+        "role": "First-time Guest",
+        "text": "So warm, so clean, and very professional."
+      },
+      "ritu": {
+        "name": "Ritu",
+        "role": "Spa Regular",
+        "text": "Best salon experience in Olaya."
+      },
+      "meera": {
+        "name": "Meera",
+        "role": "Wellness Client",
+        "text": "I book every month because the results are real."
+      },
+      "kavita": {
+        "name": "Kavita",
+        "role": "Lash Client",
+        "text": "Their lash artists are meticulous and gentle."
+      }
+    }
+  },
+  "brands": {
+    "heading": "Featuring Products From The World's Finest Brands",
+    "logoAlt": "premium beauty products at LYA"
+  },
+  "language": {
+    "switchToArabic": "العربية",
+    "switchToEnglish": "English"
+  },
+  "sitemap": {
+    "navTitle": "Sitemap",
+    "title": "Website Sitemap",
+    "description": "Explore every page, service, and section of LYA Spa & Salon.",
+    "featuresTitle": "Website Features",
+    "locationTitle": "Our Location",
+    "ctaTitle": "Ready to Experience LYA?",
+    "ctaDescription": "Book your appointment today and discover the finest Tunisian spa experience in Riyadh.",
+    "ctaButton": "Book Your Experience",
+    "categories": {
+      "main": "Main Pages",
+      "services": "Service Categories"
+    },
+    "pages": {
+      "home": "Home",
+      "homeDesc": "Welcome to LYA Spa & Salon",
+      "services": "Our Services",
+      "servicesDesc": "Explore our premium spa and beauty treatments",
+      "gallery": "Gallery",
+      "galleryDesc": "See our luxury spa environment and facilities",
+      "team": "Our Team",
+      "teamDesc": "Meet our expert beauty and spa professionals",
+      "contact": "Contact Us",
+      "contactDesc": "Get in touch for bookings and inquiries"
+    },
+    "serviceCategories": {
+      "massage": "Massage Therapy",
+      "massageDesc": "Swedish, deep tissue, and hammam massage",
+      "beauty": "Beauty Services",
+      "beautyDesc": "Full beauty treatments and styling",
+      "laser": "Laser Treatments",
+      "laserDesc": "Advanced laser skincare procedures",
+      "nails": "Nail Services",
+      "nailsDesc": "Professional manicure and nail art",
+      "hair": "Hair Services",
+      "hairDesc": "Premium hair styling and treatments"
+    }
+  },
+  "loading": {
+    "preparing": "Preparing your luxury experience..."
+  },
+  "why": {
+    "pill": "Why LYA",
+    "headline1": "Why Choose",
+    "headline2": "LYA",
+    "intro": "A Tunisian-inspired spa and salon built around real hospitality.",
+    "cta": "Book Now",
+    "title1": "Tunisian Spa Heritage",
+    "subtitle1": "Tradition",
+    "desc1": "Authentic hammam and spa rituals with modern comfort.",
+    "title2": "Quality Products",
+    "subtitle2": "Premium",
+    "desc2": "Curated clean products and professional-grade care.",
+    "title3": "Riyadh Location",
+    "subtitle3": "Convenient",
+    "desc3": "Located in Olaya with easy access and welcoming service."
+  }
+}

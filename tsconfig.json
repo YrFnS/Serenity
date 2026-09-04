@@ -17,6 +17,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["src", "components", "pages", "entities", "Layout.tsx", "utils.ts", "integrations", "vite.config.ts"],
+  "include": ["src", "components", "pages", "entities", "Layout.tsx", "utils.ts", "integrations", "vite.config.ts", ],
   "references": []
 }

@@ -1,31 +1,21 @@
 
 import { motion } from 'framer-motion';
 import { PawPrint, FlaskConical, Leaf, Beaker, ShieldOff, Droplets, WineOff } from 'lucide-react';
-
-const specialtyItems = [
-  { icon: PawPrint, text: "Cruelty Free" },
-  { icon: FlaskConical, text: "Sulfate Free" },
-  { icon: Leaf, text: "Organic" },
-  { icon: Beaker, text: "Lab Tested" },
-  { icon: ShieldOff, text: "No SLS" },
-  { icon: Droplets, text: "No Silicon" },
-  { icon: WineOff, text: "No Alcohol" }
-];
-
-const LeafDecoration = () => (
-    <motion.svg 
-      initial={{ opacity: 0, rotate: -180, scale: 0 }}
-      whileInView={{ opacity: 0.3, rotate: 0, scale: 1 }}
-      transition={{ duration: 2, ease: "easeOut" }}
-      viewport={{ once: true }}
-      width="100" height="40" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-[#C8A882] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-    >
-        <path d="M10 20C20 10 35 15 50 20C65 25 80 10 90 20" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-        <path d="M15 25C25 15 40 20 50 25C60 30 75 15 85 25" stroke="currentColor" strokeWidth="1" fill="none" opacity="0.7"/>
-    </motion.svg>
-);
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ProductSpecialty() {
+  const { t } = useLanguage();
+
+  const specialtyItems = [
+    { icon: PawPrint, text: t("product.items.crueltyFree") },
+    { icon: FlaskConical, text: t("product.items.sulfateFree") },
+    { icon: Leaf, text: t("product.items.organic") },
+    { icon: Beaker, text: t("product.items.labTested") },
+    { icon: ShieldOff, text: t("product.items.noSls") },
+    { icon: Droplets, text: t("product.items.noSilicon") },
+    { icon: WineOff, text: t("product.items.noAlcohol") }
+  ];
+
   const extendedSpecialties = [...specialtyItems, ...specialtyItems, ...specialtyItems, ...specialtyItems];
 
   return (
@@ -36,7 +26,7 @@ export default function ProductSpecialty() {
       viewport={{ once: true }}
       className="py-16 md:py-20 overflow-hidden relative"
     >
-      <style jsx>{`
+      <style>{`
         .marquee-container {
           display: flex;
           width: fit-content;
@@ -69,9 +59,9 @@ export default function ProductSpecialty() {
             viewport={{ once: true }}
             className="font-serif text-4xl md:text-5xl font-bold leading-tight"
           >
-              <span className="text-[#0F0F0F]">Purely Potent, Naturally</span>
+              <span className="text-[#0F0F0F]">{t("product.title1")}</span>
               <br />
-              <span className="text-[#C8A882]">Our Organic Product Philosophy</span>
+              <span className="text-[#C8A882]">{t("product.title2")}</span>
           </motion.h2>
         <motion.p 
           initial={{ opacity: 0, y: 30, scale: 0.8 }}
@@ -80,7 +70,7 @@ export default function ProductSpecialty() {
           viewport={{ once: true }}
           className="font-sans text-lg text-gray-600 mt-6 max-w-3xl mx-auto leading-relaxed"
         >
-          At SERENITY, we exclusively use lab-tested, cruelty-free, and certified organic products for our spa treatments in  . Our commitment to sulfate-free, paraben-free, and alcohol-free formulations ensures your skin receives only the purest ingredients for a truly radiant, healthy glow.
+          {t("product.intro")}
         </motion.p>
       </div>
 

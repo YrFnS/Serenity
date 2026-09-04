@@ -1,65 +1,65 @@
-
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const testimonials = [
   {
     id: 1,
-    name: "Sunita Verma",
-    role: "Manager",
+    nameKey: "testimonials.items.sunita.name",
+    roleKey: "testimonials.items.sunita.role",
     rating: 4,
-    text: "A truly professional and rejuvenating experience. The staff is courteous and the ambiance is perfect for relaxation. I left feeling refreshed and renewed. Highly recommended for anyone seeking a premium spa service in the city.",
+    textKey: "testimonials.items.sunita.text",
     image_url: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/8e0908ef4_image.png?w=800&q=90"
   },
   {
     id: 2,
-    name: "Priya Sharma",
-    role: "Fashion Designer",
+    nameKey: "testimonials.items.priya.name",
+    roleKey: "testimonials.items.priya.role",
     rating: 5,
-    text: "SERENITY has completely transformed my beauty routine. The highly skilled professionals and premium equipment deliver results that exceed expectations. Every visit feels like a luxury retreat in the heart of  .",
+    textKey: "testimonials.items.priya.text",
     image_url: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/845cb87f5_image.png?w=800&q=90"
   },
   {
     id: 3,
-    name: "Anjali Das",
-    role: "Corporate Executive",
+    nameKey: "testimonials.items.anjali.name",
+    roleKey: "testimonials.items.anjali.role",
     rating: 4,
-    text: "The attention to detail and professional expertise at SERENITY is unmatched. Their state-of-the-art equipment and skilled staff make every treatment a perfect experience. I wouldn't trust my skin and wellness to anyone else.",
+    textKey: "testimonials.items.anjali.text",
     image_url: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/1acf8ba01_image.png?w=800&q=90"
   },
   {
     id: 4,
-    name: "Ritu Banerjee",
-    role: "Entrepreneur",
+    nameKey: "testimonials.items.ritu.name",
+    roleKey: "testimonials.items.ritu.role",
     rating: 5,
-    text: "From the moment you enter SERENITY, you know you're in for something special. The combination of luxury ambiance, professional staff, and cutting-edge treatments creates an experience that's truly transformative.",
+    textKey: "testimonials.items.ritu.text",
     image_url: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/088f1f218_image.png?w=800&q=90"
   },
   {
     id: 5,
-    name: "Meera Singh",
-    role: "Doctor",
+    nameKey: "testimonials.items.meera.name",
+    roleKey: "testimonials.items.meera.role",
     rating: 4,
-    text: "As a healthcare professional, I appreciate SERENITY's commitment to using premium equipment and maintaining the highest standards. The skilled therapists understand exactly what my body needs for complete rejuvenation.",
+    textKey: "testimonials.items.meera.text",
     image_url: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/7cf2b68ad_image.png?w=800&q=90"
   },
   {
     id: 6,
-    name: "Kavita Roy",
-    role: "Business Owner",
+    nameKey: "testimonials.items.kavita.name",
+    roleKey: "testimonials.items.kavita.role",
     rating: 5,
-    text: "SERENITY sets the gold standard for luxury wellness in  . The professional expertise combined with world-class equipment ensures every treatment delivers exceptional results. It's my personal sanctuary for beauty and wellness.",
+    textKey: "testimonials.items.kavita.text",
     image_url: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/2ffc407b6_image.png?w=800&q=90"
   }
 ];
 
 export default function TestimonialsSection() {
+  const { t, language } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [imageError, setImageError] = useState({});
   const intervalRef = useRef(null);
 
-  // Function to start the automatic slideshow
   const startSlideshow = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
@@ -67,7 +67,6 @@ export default function TestimonialsSection() {
     }, 2000);
   };
 
-  // Function to reset the slideshow timer (used after manual interaction)
   const resetSlideshow = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     startSlideshow();
@@ -98,10 +97,18 @@ export default function TestimonialsSection() {
   };
 
   const handleImageError = (testimonialId) => {
-    setImageError(prev => ({ ...prev, [testimonialId]: true }));
+    setImageError((prev) => ({ ...prev, [testimonialId]: true }));
   };
 
-  const currentTestimonial = testimonials[currentIndex];
+  const current = testimonials[currentIndex];
+  const currentTestimonial = {
+    id: current.id,
+    name: t(current.nameKey),
+    role: t(current.roleKey),
+    rating: current.rating,
+    text: t(current.textKey),
+    image_url: current.image_url
+  };
 
   return (
     <section
@@ -112,107 +119,110 @@ export default function TestimonialsSection() {
       <div className="relative max-w-4xl mx-auto px-6">
         <div className="text-center">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="relative"
+            className="inline-flex items-center gap-2 bg-[#C8A882]/10 rounded-full px-4 py-2 mb-6"
           >
-            <Quote className="absolute -top-2 -right-2 w-16 h-16 text-gray-200/80" />
-            
-            <h2 className="font-serif text-4xl lg:text-5xl font-light italic text-[#0F0F0F] mb-8 relative z-10">
-              Testimonials
-            </h2>
+            <Star className="w-4 h-4 text-[#C8A882]" />
+            <span className="text-sm font-sans font-semibold uppercase tracking-widest text-[#C8A882]">
+              {t("testimonials.pill")}
+            </span>
+          </motion.div>
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentTestimonial.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4 }}
-                className="space-y-6"
-              >
-                <div className="flex justify-center mb-4">
-                  <div className="w-24 h-24 rounded-full overflow-hidden shadow-lg border-4 border-white bg-gray-200">
-                    {imageError[currentTestimonial.id] ? (
-                      <div className="w-full h-full bg-gradient-to-br from-[#C8A882] to-[#FF5C8D] flex items-center justify-center">
-                        <span className="text-white font-bold text-lg">
-                          {currentTestimonial.name.split(' ').map(n => n[0]).join('')}
-                        </span>
-                      </div>
-                    ) : (
-                      <img
-                        src={currentTestimonial.image_url}
-                        alt={`${currentTestimonial.name}, a happy client of SERENITY Spa in  `}
-                        className="w-full h-full object-cover"
-                        onError={() => handleImageError(currentTestimonial.id)}
-                      />
-                    )}
-                  </div>
-                </div>
+          <h2 className="font-serif text-4xl lg:text-5xl font-light italic text-[#0F0F0F] mb-8 relative z-10">
+            {t("testimonials.title")}
+          </h2>
 
-                <p className="font-sans text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto min-h-[120px]">
-                  {currentTestimonial.text}
-                </p>
-
-                <div className="flex justify-center gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-5 h-5 transition-colors duration-300 ${
-                        i < currentTestimonial.rating
-                          ? 'text-[#C8A882] fill-current'
-                          : 'text-gray-300'
-                      }`}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentTestimonial.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+              className="space-y-6"
+            >
+              <div className="flex justify-center mb-4">
+                <div className="w-24 h-24 rounded-full overflow-hidden shadow-lg border-4 border-white bg-gray-200">
+                  {imageError[currentTestimonial.id] ? (
+                    <div className="w-full h-full bg-gradient-to-br from-[#C8A882] to-[#FF5C8D] flex items-center justify-center">
+                      <span className="text-white font-bold text-lg">
+                        {currentTestimonial.name.split(' ').map((n) => n[0]).join('')}
+                      </span>
+                    </div>
+                  ) : (
+                    <img
+                      src={currentTestimonial.image_url}
+                      alt={`${currentTestimonial.name}, ${t("testimonials.clientAlt")}`}
+                      className="w-full h-full object-cover"
+                      onError={() => handleImageError(currentTestimonial.id)}
                     />
-                  ))}
+                  )}
                 </div>
-
-                <div>
-                  <h4 className="font-serif text-xl font-semibold text-[#0F0F0F]">
-                    {currentTestimonial.name}
-                  </h4>
-                  <p className="font-sans text-sm text-gray-500 uppercase tracking-wider">
-                    {currentTestimonial.role}
-                  </p>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Navigation */}
-            <div className="flex items-center justify-center gap-8 mt-8">
-              <div className="flex items-center gap-4">
-                <button
-                  onClick={prevTestimonial}
-                  className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:bg-[#C8A882] hover:text-white transition-all duration-300"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={nextTestimonial}
-                  className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:bg-[#C8A882] hover:text-white transition-all duration-300"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
               </div>
 
-              {/* Dots Indicator */}
-              <div className="flex gap-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => goToTestimonial(index)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      index === currentIndex
-                        ? 'bg-[#C8A882] w-6'
-                        : 'bg-gray-300 hover:bg-gray-400'
+              <p className="font-sans text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto min-h-[120px]">
+                {currentTestimonial.text}
+              </p>
+
+              <div className="flex justify-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`w-5 h-5 transition-colors duration-300 ${
+                      i < currentTestimonial.rating
+                        ? 'text-[#C8A882] fill-current'
+                        : 'text-gray-300'
                     }`}
                   />
                 ))}
               </div>
+
+              <div>
+                <h4 className="font-serif text-xl font-semibold text-[#0F0F0F]">
+                  {currentTestimonial.name}
+                </h4>
+                <p className="font-sans text-sm text-gray-500 uppercase tracking-wider">
+                  {currentTestimonial.role}
+                </p>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Navigation */}
+          <div className="flex items-center justify-center gap-8 mt-8">
+            <div className="flex items-center gap-4">
+              <button
+                onClick={prevTestimonial}
+                className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:bg-[#C8A882] hover:text-white transition-all duration-300"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                onClick={nextTestimonial}
+                className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:bg-[#C8A882] hover:text-white transition-all duration-300"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
             </div>
-          </motion.div>
+
+            {/* Dots Indicator */}
+            <div className="flex gap-2">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToTestimonial(index)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    index === currentIndex
+                      ? 'bg-[#C8A882] w-6'
+                      : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

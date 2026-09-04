@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const AnimatedFlower = () => (
   <motion.svg
@@ -468,6 +469,7 @@ const AnimatedFlower = () => (
 );
 
 export default function LoadingScreen({ onLoadingComplete }) {
+  const { t, language } = useLanguage();
   const [progress, setProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
 
@@ -519,10 +521,10 @@ export default function LoadingScreen({ onLoadingComplete }) {
               className="text-center mt-6"
             >
               <h1 className="font-serif text-4xl font-bold text-[#C8A882] mb-2">
-                SERENITY
+                {t("brand.name")}
               </h1>
               <p className="text-sm text-gray-600 tracking-widest uppercase">
-                Luxury Spa & Salon
+                {language === "ar" ? t("brand.taglineAr") : t("brand.taglineEn")}
               </p>
             </motion.div>
           </motion.div>
@@ -549,7 +551,7 @@ export default function LoadingScreen({ onLoadingComplete }) {
             transition={{ duration: 0.5, delay: 0.7 }}
             className="text-sm text-gray-500 mt-4 font-medium"
           >
-            Preparing your luxury experience...
+            {t("loading.preparing")}
           </motion.p>
         </motion.div>
       )}

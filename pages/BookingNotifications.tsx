@@ -179,7 +179,7 @@ export default function BookingNotifications() {
                         <p><strong>Service:</strong> {notification.service_name}</p>
                         <p><strong>Price:</strong> 
                           <span className="text-[#C8A882] font-bold ml-1">
-                            ₹{notification.service_price?.toLocaleString('en-IN')}
+                            SAR {notification.service_price?.toLocaleString('en-US')}
                           </span>
                         </p>
                         <p><strong>Duration:</strong> {notification.service_duration}</p>

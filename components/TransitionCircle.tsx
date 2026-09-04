@@ -1,36 +1,52 @@
-
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-const RotatingText = () => (
-  <motion.div
-    className="absolute inset-0 w-full h-full"
-    animate={{ rotate: 360 }}
-    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-  >
-    <svg viewBox="0 0 100 100" className="w-full h-full">
-      <path
-        id="textPath"
-        d="M 50, 50 m -42, 0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0"
-        fill="transparent"
-      />
-      <text 
-        fill="#333333" 
-        className="uppercase"
-        style={{ 
-          fontSize: '7px',
-          fontFamily: 'Cormorant, serif',
-          fontWeight: 'normal'
-        }}
-      >
-        <textPath xlinkHref="#textPath" textLength="264" lengthAdjust="spacingAndGlyphs">
-          * BODY * MIND * SOUL * BODY * MIND * SOUL
-        </textPath>
-      </text>
-    </svg>
-  </motion.div>
-);
+const RotatingText = () => {
+  const { language } = useLanguage();
+  const pathText =
+    language === "ar"
+      ? "* جَسَد * عَقْل * رُوح * جَسَد * عَقْل * رُوح *"
+      : "* BODY * MIND * SOUL * BODY * MIND * SOUL";
+
+  return (
+    <motion.div
+      className="absolute inset-0 w-full h-full"
+      animate={{ rotate: 360 }}
+      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+    >
+      <svg viewBox="0 0 100 100" className="w-full h-full">
+        <path
+          id="textPath"
+          d="M 50, 50 m -42, 0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0"
+          fill="transparent"
+        />
+        <text
+          fill="#333333"
+          className="uppercase"
+          style={{
+            fontSize: "7px",
+            fontFamily: "Cormorant, serif",
+            fontWeight: "normal"
+          }}
+        >
+          <textPath
+            xlinkHref="#textPath"
+            textLength="264"
+            lengthAdjust="spacingAndGlyphs"
+          >
+            {pathText}
+          </textPath>
+        </text>
+      </svg>
+    </motion.div>
+  );
+};
 
 export default function TransitionCircle() {
+  const { language } = useLanguage();
+  const brandText = "LYA";
+  const taglineText = language === "ar" ? "سبا و صالون" : "Spa & Salon";
+
   return (
     <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2 z-30">
       <motion.div
@@ -40,42 +56,33 @@ export default function TransitionCircle() {
         viewport={{ once: true }}
         className="relative w-[140px] h-[140px] md:w-[160px] md:h-[160px] lg:w-[180px] lg:h-[180px]"
       >
-        {/* Outer Beige Circle - Using padding for responsive border */}
-        <div 
-          className="absolute inset-0 bg-[#F5E6D8] rounded-full shadow-xl p-3 md:p-4 lg:p-5"
-        >
-          {/* Inner White Circle */}
-          <div 
-            className="w-full h-full rounded-full flex flex-col items-center justify-center bg-white text-center"
-          >
-            {/* SERENITY Text - Properly contained within white circle */}
+        <div className="absolute inset-0 bg-[#F5E6D8] rounded-full shadow-xl p-3 md:p-4 lg:p-5">
+          <div className="w-full h-full rounded-full flex flex-col items-center justify-center bg-white text-center">
             <div className="px-2 py-1 w-full h-full flex flex-col items-center justify-center">
-              <h3 
+              <h3
                 className="font-serif font-bold text-[#333333] leading-tight mb-1"
-                style={{ 
-                  fontSize: 'clamp(18px, 4vw, 20px)',
-                  letterSpacing: '1.5px',
-                  textShadow: '1px 1px 2px rgba(0,0,0,0.15)'
+                style={{
+                  fontSize: "clamp(18px, 4vw, 20px)",
+                  letterSpacing: "1.5px",
+                  textShadow: "1px 1px 2px rgba(0,0,0,0.15)"
                 }}
               >
-                SERENITY
+                {brandText}
               </h3>
-              <p 
+              <p
                 className="font-sans text-[#C8A882] tracking-wider"
-                style={{ 
-                  fontSize: 'clamp(11px, 2.5vw, 13px)',
-                  letterSpacing: '1px'
+                style={{
+                  fontSize: "clamp(11px, 2.5vw, 13px)",
+                  letterSpacing: "1px"
                 }}
               >
-                Spa & Salon
+                {taglineText}
               </p>
             </div>
           </div>
         </div>
 
-        {/* Rotating Text */}
         <RotatingText />
-        
       </motion.div>
     </div>
   );

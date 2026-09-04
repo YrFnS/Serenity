@@ -8,14 +8,23 @@ import BookingModal from "@/components/BookingModal";
 import ReviewWidget from "@/components/ReviewWidget";
 import SeoSchema from "@/components/SeoSchema";
 import LoadingScreen from "@/components/LoadingScreen";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Layout({ children, currentPageName }) {
   const location = useLocation();
+  const { language, toggleLanguage, t } = useLanguage();
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isBookingOpen, setIsBookingOpen] = React.useState(false);
   const [initialService, setInitialService] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+      document.documentElement.lang = language;
+    }
+  }, [language]);
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -55,12 +64,12 @@ export default function Layout({ children, currentPageName }) {
   }, []);
 
   const navigationItems = React.useMemo(() => [
-    { name: "Home", url: "/" },
-    { name: "Services", url: createPageUrl("Services") },
-    { name: "Gallery", url: createPageUrl("Gallery") },
-    { name: "Our Team", url: createPageUrl("Team") },
-    { name: "Contact", url: createPageUrl("Contact") }
-  ], []);
+    { name: t("nav.home"), url: "/" },
+    { name: t("nav.services"), url: createPageUrl("Services") },
+    { name: t("nav.gallery"), url: createPageUrl("Gallery") },
+    { name: t("nav.team"), url: createPageUrl("Team") },
+    { name: t("nav.contact"), url: createPageUrl("Contact") }
+  ], [language]);
 
   // Add admin link only if URL contains admin parameter OR if accessing AdminBookings page
   const isAdminMode = React.useMemo(() => {
@@ -82,8 +91,8 @@ export default function Layout({ children, currentPageName }) {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F2EC] font-sans text-[length:var(--font-body)] leading-[1.618]">
-      <style jsx>{`
+    <div className="min-h-screen bg-[#F8F2EC] font-sans text-[length:var(--font-body)] leading-[1.618]" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+      <style>{`
         :root {
           --obsidian: #0F0F0F;
           --shell: #F8F2EC;
@@ -208,7 +217,7 @@ export default function Layout({ children, currentPageName }) {
             <Link 
               to="/" 
               className="flex items-center gap-3 group transform transition-transform hover:scale-105"
-              aria-label="SERENITY Spa & Salon - Go to homepage"
+              aria-label="LYA Spa & Salon - Go to homepage"
             >
               <div className="relative">
                 <Sparkles 
@@ -218,10 +227,10 @@ export default function Layout({ children, currentPageName }) {
               </div>
               <div>
                 <h1 className={`text-[#C8A882] text-lg font-bold font-serif text-center glow-text`}>
-                  SERENITY
+                  {t('brand.name')}
                 </h1>
                 <p className={`text-xs text-center tracking-widest ${isScrolled || isMenuOpen ? 'text-[#C8A882]' : 'text-[#C8A882] text-shadow-dark'}`}>
-                  Spa & Salon
+                  {language === 'ar' ? t('brand.taglineAr') : t('brand.taglineEn')}
                 </p>
               </div>
             </Link>
@@ -246,14 +255,21 @@ export default function Layout({ children, currentPageName }) {
               ))}
             </div>
 
-            {/* CTA Button with improved accessibility */}
-            <div className="hidden lg:block">
-              <button 
+            {/* Language Toggle + CTA */}
+            <div className="hidden lg:flex items-center gap-3">
+              <button
+                onClick={toggleLanguage}
+                className="px-3 py-1.5 rounded-full border border-[#C8A882]/40 text-xs font-medium text-[#0F0F0F] hover:bg-[#C8A882]/10 transition-colors"
+                aria-label="Toggle language"
+              >
+                {language === 'ar' ? 'English' : 'العربية'}
+              </button>
+              <button
                 onClick={() => window.dispatchEvent(new CustomEvent('open-booking-modal'))}
                 className="bg-[#C8A882] text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-[#0F0F0F] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2"
                 aria-label="Open booking appointment modal"
               >
-                Book Appointment
+                {t('nav.bookAppointment')}
               </button>
             </div>
 
@@ -294,6 +310,13 @@ export default function Layout({ children, currentPageName }) {
                 {item.name}
               </Link>
             ))}
+            <button
+              onClick={toggleLanguage}
+              className="text-lg font-medium text-[#0F0F0F] hover:text-[#C8A882] transition-colors"
+              aria-label="Toggle language"
+            >
+              {language === 'ar' ? 'English' : 'العربية'}
+            </button>
              <button 
                 onClick={() => {
                   setIsMenuOpen(false);
@@ -302,7 +325,7 @@ export default function Layout({ children, currentPageName }) {
                 className="mt-8 bg-[#C8A882] text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-[#0F0F0F] transition-all duration-300 hover:scale-105 shadow-lg focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2"
                 aria-label="Open booking appointment modal"
               >
-                Book Appointment
+                {t('nav.bookAppointment')}
               </button>
           </div>
         </div>
@@ -324,13 +347,14 @@ export default function Layout({ children, currentPageName }) {
               <div className="flex items-center gap-3 mb-6">
                 <Sparkles className="w-8 h-8 text-[#C8A882] sparkle-animation" aria-hidden="true" />
                 <div>
-                  <h2 className="font-serif text-2xl font-bold glow-text">SERENITY</h2>
-                  <p className="text-xs text-[#C8A882] tracking-widest">Luxury Spa & Salon</p>
+                  <h2 className="font-serif text-2xl font-bold glow-text">{t('brand.name')}</h2>
+                  <p className="text-xs text-[#C8A882] tracking-widest">
+                    {language === 'ar' ? t('brand.taglineAr') : t('brand.taglineEn')}
+                  </p>
                 </div>
               </div>
               <p className="text-sm leading-[1.618] text-gray-300 mb-6">
-                 's premier luxury wellness destination. Experience unparalleled service 
-                with our highly skilled professionals and state-of-the-art equipment.
+                {language === 'ar' ? t('footer.brandDescriptionAr') : t('footer.brandDescriptionEn')}
               </p>
               <div className="flex gap-4" role="list" aria-label="Social media links">
                 <a 
@@ -354,49 +378,49 @@ export default function Layout({ children, currentPageName }) {
 
             {/* Services */}
             <div className="mb-[1.2em]">
-              <h3 className="font-serif text-lg font-semibold mb-6 text-[#C8A882]">Premium Services</h3>
+              <h3 className="font-serif text-lg font-semibold mb-6 text-[#C8A882]">{t('footer.servicesTitle')}</h3>
               <nav aria-label="Services navigation">
                 <ul className="space-y-3 text-sm">
-                  <li><a href="#" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">Luxury Hair Styling</a></li>
-                  <li><a href="#" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">Advanced Skincare</a></li>
-                  <li><a href="#" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">Therapeutic Massage</a></li>
-                  <li><a href="#" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">Premium Nail Care</a></li>
-                  <li><a href="#" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">Wellness Treatments</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">{t('footer.services.luxuryHairStyling')}</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">{t('footer.services.advancedSkincare')}</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">{t('footer.services.therapeuticMassage')}</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">{t('footer.services.premiumNailCare')}</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">{t('footer.services.wellnessTreatments')}</a></li>
                 </ul>
               </nav>
             </div>
 
             {/* Contact */}
             <div className="mb-[1.2em]">
-              <h3 className="font-serif text-lg font-semibold mb-6 text-[#C8A882]">Visit Our Sanctuary</h3>
+              <h3 className="font-serif text-lg font-semibold mb-6 text-[#C8A882]">{t('footer.visitTitle')}</h3>
               <address className="space-y-4 text-sm flex flex-col items-center md:items-start not-italic">
                 <div className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-[#C8A882] mt-0.5 flex-shrink-0" aria-hidden="true" />
-                  <span className="text-gray-300 leading-[1.618]">P-145, Sector A, Metropolitan Co-Operative Housing Society Limited,  ,   700105</span>
+                  <span className="text-gray-300 leading-[1.618]">{t('contact.address')}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-[#C8A882]" aria-hidden="true" />
-                  <a href="tel:+919876543210" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">+91 98765 43210</a>
+                  <a href={`tel:${t('contact.phone')}`} className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">{t('contact.phone')}</a>
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="w-5 h-5 text-[#C8A882]" aria-hidden="true" />
-                  <a href="mailto:info@serenitysalon.in" className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">info@serenitysalon.in</a>
+                  <a href={`mailto:${t('contact.email')}`} className="text-gray-300 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">{t('contact.email')}</a>
                 </div>
               </address>
             </div>
 
             {/* Newsletter */}
             <div className="mb-[1.2em]">
-              <h3 className="font-serif text-lg font-semibold mb-6 text-[#C8A882]">Luxury Updates</h3>
+              <h3 className="font-serif text-lg font-semibold mb-6 text-[#C8A882]">{t('footer.newsletterTitle')}</h3>
               <p className="text-sm text-gray-300 mb-4 leading-[1.618]">
-                Subscribe for exclusive offers and premium wellness insights.
+                {t('footer.newsletterDesc')}
               </p>
               <form className="flex flex-col sm:flex-row gap-2 max-w-sm mx-auto md:max-w-none" aria-label="Newsletter subscription">
-                <label htmlFor="newsletter-email" className="sr-only">Email address</label>
+                <label htmlFor="newsletter-email" className="sr-only">{t('footer.newsletter.placeholder')}</label>
                 <input
                   id="newsletter-email"
                   type="email"
-                  placeholder="Your email"
+                  placeholder={t('footer.newsletter.placeholder')}
                   className="flex-1 px-4 py-2 bg-white/10 border border-[#C8A882]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#C8A882] focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F]"
                   required
                 />
@@ -404,7 +428,7 @@ export default function Layout({ children, currentPageName }) {
                   type="submit"
                   className="px-4 py-2 bg-[#C8A882] text-white rounded-lg hover:bg-[#FF5C8D] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F]"
                 >
-                  Subscribe
+                  {t('footer.subscribe')}
                 </button>
               </form>
             </div>
@@ -413,7 +437,7 @@ export default function Layout({ children, currentPageName }) {
           {/* Bottom Bar */}
           <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-400">
-              © 2024 Serenity Luxury Spa & Salon. All rights reserved.
+              {t('footer.rights')}
             </p>
             
             <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
@@ -423,16 +447,16 @@ export default function Layout({ children, currentPageName }) {
                     to={createPageUrl("Sitemap")}
                     className="text-gray-400 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded"
                   >
-                    Sitemap
+                    {t('footer.sitemap')}
                   </Link>
-                  <a href="#" className="text-gray-400 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">Privacy Policy</a>
-                  <a href="#" className="text-gray-400 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">Terms of Service</a>
+                  <a href="#" className="text-gray-400 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">{t('footer.privacy')}</a>
+                  <a href="#" className="text-gray-400 hover:text-[#C8A882] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#C8A882] focus:ring-offset-2 focus:ring-offset-[#0F0F0F] rounded">{t('footer.terms')}</a>
                 </div>
               </nav>
               
-              {/* Digital Doctors Attribution */}
+              {/* LYA Branding */}
               <div className="text-xs text-gray-500">
-                Created by: <span className="text-[#C8A882] hover:text-white transition-colors duration-300">Digital Doctors</span>, +91-9555-9555-95
+                {t('footer.bottomBranding')}
               </div>
             </div>
           </div>

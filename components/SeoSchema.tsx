@@ -1,65 +1,72 @@
-
 // This component injects advanced, SEO-friendly structured data into the page head.
+import { useLanguage } from "@/contexts/LanguageContext";
+
 export default function SeoSchema() {
+  const { language } = useLanguage();
+
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "HealthAndBeautyBusiness",
-        "@id": "https://www.serenitysalon.in/#organization",
-        "name": "SERENITY Luxury Spa & Salon",
-        "url": "https://www.serenitysalon.in/",
-        "logo": "https://www.serenitysalon.in/logo.png", // Placeholder URL, should be replaced with actual logo URL
-        "description": "Discover SERENITY,  's #1 luxury organic spa and salon in  . We offer world-class, state-of-the-art equipment and highly skilled, certified professionals for premium organic spa treatments, therapeutic massages, and advanced beauty services. Your ultimate wellness sanctuary.",
+        "@id": "https://www.lya.sa/#organization",
+        "name": "LYA Spa & Salon",
+        "url": "https://www.lya.sa/",
+        "logo": "https://www.lya.sa/favicon.svg",
+        "description": language === "ar"
+          ? "اكتشفي LYA، أفضل سبا وصالون تونسي في الرياض. نقدّم علاجات سبا منزلية عضوية، مساج، تجميل، وعلاجات شعر وأظافر بجودة عالية. موقعكم المثالي للرفاهية."
+          : "Discover LYA, Riyadh's premier Tunisian spa and salon. We offer organic spa treatments, massage therapy, beauty services, hair, and nails with premium quality. Your ultimate wellness destination.",
         "image": "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/831601306_14.jpg",
-        "telephone": "+91-98765-43210",
-        "priceRange": "₹₹ - ₹₹₹",
+        "telephone": "+966 55 000 0000",
+        "priceRange": "SAR ٥٠٠ - ١٢٠٠٠",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "P-145, Sector A, Metropolitan Co-Operative Housing Society Limited,  ",
-          "addressLocality": " ",
-          "postalCode": "700105",
-          "addressRegion": "West Bengal",
-          "addressCountry": "IN"
+          "streetAddress": "Prince Sultan Road",
+          "addressLocality": "Riyadh",
+          "postalCode": "12345",
+          "addressRegion": "Riyadh Province",
+          "addressCountry": "SA"
         },
         "geo": {
           "@type": "GeoCoordinates",
-          "latitude": "22.5413", // Approximate coordinates for  ,  
-          "longitude": "88.3833"
+          "latitude": "24.7136",
+          "longitude": "46.6753"
         },
         "openingHoursSpecification": [
-          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "10:00", "closes": "20:00" },
-          { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "19:00" },
-          { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "10:00", "closes": "18:00" }
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "10:00", "closes": "20:00" },
+              { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday"], "opens": "16:00", "closes": "20:00" },
+              { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday"], "opens": "09:00", "closes": "19:00" },
         ],
         "sameAs": [
-            "https://www.facebook.com/serenity ", // Placeholder
-            "https://www.instagram.com/serenity " // Placeholder
+          "https://www.instagram.com/lyaspa",
+          "https://www.facebook.com/lyaspa"
         ],
         "hasOffer": [
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Japanese Head Spa" }, "price": "3500", "priceCurrency": "INR" },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Deep Tissue Massage" }, "price": "3500", "priceCurrency": "INR" },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Microblading" }, "price": "6500", "priceCurrency": "INR" }
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Swedish Massage" }, "price": "350", "priceCurrency": "SAR" },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tunisian Hammam" }, "price": "450", "priceCurrency": "SAR" },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Royal Korean Ritual Manicure" }, "price": "380", "priceCurrency": "SAR" }
         ]
       },
       {
         "@type": "WebSite",
-        "@id": "https://www.serenitysalon.in/#website",
-        "url": "https://www.serenitysalon.in/",
-        "name": "SERENITY Luxury Spa & Salon",
-        "publisher": { "@id": "https://www.serenitysalon.in/#organization" },
+        "@id": "https://www.lya.sa/#website",
+        "url": "https://www.lya.sa/",
+        "name": "LYA Spa & Salon",
+        "publisher": { "@id": "https://www.lya.sa/#organization" },
         "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://www.serenitysalon.in/search?q={search_term_string}",
-            "query-input": "required name=search_term_string"
+          "@type": "SearchAction",
+          "target": "https://www.lya.sa/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
         }
       },
       {
         "@type": "Review",
-        "itemReviewed": { "@id": "https://www.serenitysalon.in/#organization" },
+        "itemReviewed": { "@id": "https://www.lya.sa/#organization" },
         "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-        "author": { "@type": "Person", "name": "Priya Sharma" },
-        "reviewBody": "SERENITY has completely transformed my beauty routine. As the best luxury spa in  , their highly skilled professionals and premium equipment deliver results that exceed expectations."
+        "author": { "@type": "Person", "name": "فاطمة الزهراء" },
+        "reviewBody": language === "ar"
+          ? "لقد غيّرت LYA روتيني المستشعري. بفضل محترفيها المتميزين ومعداتهم العالية الجودة، النتائج تتجاوز التوقعات."
+          : "Discover LYA, Riyadh's premier Tunisian spa and salon. We offer organic spa treatments, massage therapy, beauty services, hair, and nails with premium quality. Your ultimate wellness destination."
       }
     ]
   };

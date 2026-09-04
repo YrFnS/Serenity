@@ -1,8 +1,11 @@
 export interface TeamMember {
   id?: string;
   name: string;
+  nameAr?: string;
   title: string;
+  titleAr?: string;
   bio?: string;
+  bioAr?: string;
   image_url?: string;
   specialties?: string[];
   years_experience?: number;

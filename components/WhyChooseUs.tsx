@@ -1,29 +1,31 @@
 
 import { motion } from "framer-motion";
 import { Leaf, Award, Gift, Sparkles } from "lucide-react";
-
-const features = [
-  {
-    icon: Leaf,
-    title: "The Pinnacle of Technology",
-    subtitle: "FLAWLESS PRECISION",
-    description: "We harness state-of-the-art equipment to deliver treatments with unparalleled accuracy, ensuring visible, lasting results from your very first visit."
-  },
-  {
-    icon: Award,
-    title: "The Touch of Mastery",
-    subtitle: "ELITE THERAPISTS",
-    description: "Our team comprises  's most sought-after experts, each a master of their craft, dedicated to providing personalized and deeply restorative care."
-  },
-  {
-    icon: Gift,
-    title: "An Oasis of Calm",
-    subtitle: "ABSOLUTE SANCTUARY",
-    description: "Step into a world designed for your complete tranquility. Every detail, from the ambient lighting to the serene music, is curated for your ultimate comfort and escape."
-  }
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function WhyChooseUs() {
+  const { t, language } = useLanguage();
+
+  const features = [
+    {
+      icon: Leaf,
+      title: t("why.title1"),
+      subtitle: t("why.subtitle1"),
+      description: t("why.desc1")
+    },
+    {
+      icon: Award,
+      title: t("why.title2"),
+      subtitle: t("why.subtitle2"),
+      description: t("why.desc2")
+    },
+    {
+      icon: Gift,
+      title: t("why.title3"),
+      subtitle: t("why.subtitle3"),
+      description: t("why.desc3")
+    }
+  ];
   return (
     <section id="why-us" className="pt-20 md:pt-24 lg:pt-28 pb-16 md:pb-20 lg:pb-24 bg-gradient-to-b from-[#F8F2EC] to-white relative overflow-hidden">
       {/* Enhanced Background Decorations */}
@@ -57,7 +59,7 @@ export default function WhyChooseUs() {
                 className="inline-flex items-center gap-2 bg-[#C8A882]/10 rounded-full px-4 py-2 mb-6"
               >
                 <Sparkles className="w-4 h-4 text-[#C8A882]" />
-                <span className="font-sans text-sm text-[#C8A882] font-medium uppercase tracking-wider"> 'S PREMIER LUXURY SPA</span>
+                <span className="font-sans text-sm text-[#C8A882] font-medium uppercase tracking-wider">{t('why.pill')}</span>
               </motion.div>
               
               <motion.h2 
@@ -67,9 +69,9 @@ export default function WhyChooseUs() {
                 viewport={{ once: true }}
                 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
               >
-                <span className="text-[#0F0F0F]">Why Choose SERENITY</span>
+                <span className="text-[#0F0F0F]">{t("why.headline1")}</span>
                 <br />
-                <span className="text-[#C8A882]">Organic Spa & Salon</span>
+                <span className="text-[#C8A882]">{t("why.headline2")}</span>
               </motion.h2>
               
               <motion.p 
@@ -79,16 +81,16 @@ export default function WhyChooseUs() {
                 viewport={{ once: true }}
                 className="font-sans text-lg text-gray-600 leading-relaxed mb-8 max-w-3xl mx-auto"
               >
-                Experience  's #1 luxury organic spa & salon where advanced technology meets expert care. Our certified therapists use premium organic products and state-of-the-art equipment to deliver transformative wellness treatments that rejuvenate your body, mind, and soul.
+                {t("why.intro")}
               </motion.p>
             </div>
 
             {/* Features List */}
-            <div className="space-y-8 max-w-2xl mx-auto text-left">
+            <div className="space-y-8 max-w-2xl mx-auto text-start">
               {features.map((feature, index) => (
                 <motion.div
                   key={feature.title}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100, rotateY: index % 2 === 0 ? -30 : 30, scale: 0.8 }}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? (language === 'ar' ? 100 : -100) : (language === 'ar' ? -100 : 100), rotateY: index % 2 === 0 ? -30 : 30, scale: 0.8 }}
                   whileInView={{ opacity: 1, x: 0, rotateY: 0, scale: 1 }}
                   transition={{ 
                     duration: 1.2, 
@@ -98,8 +100,8 @@ export default function WhyChooseUs() {
                     damping: 15
                   }}
                   viewport={{ once: true }}
-                  whileHover={{ scale: 1.05, x: 10 }}
-                  className="flex items-start gap-4 group cursor-pointer"
+                  whileHover={{ scale: 1.05, x: language === 'ar' ? -10 : 10 }}
+                  className={`flex items-start gap-4 group cursor-pointer ${language === 'ar' ? 'flex-row-reverse' : ''}`}
                 >
                   {/* Icon */}
                   <motion.div 
@@ -161,7 +163,7 @@ export default function WhyChooseUs() {
                 onClick={() => window.dispatchEvent(new CustomEvent('open-booking-modal'))}
                 className="bg-[#C8A882] text-white px-8 py-4 rounded-full font-sans font-medium hover:bg-[#FF5C8D] transition-all duration-300 shadow-lg"
               >
-                Begin Your Transformation
+                {t("why.cta")}
               </motion.button>
             </motion.div>
           </motion.div>

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, X } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const reviews = [
   {
@@ -16,7 +17,7 @@ const reviews = [
     id: 2,
     name: "Anjali D.",
     rating: 5,
-    text: "Best massage experience in  . Highly recommend!",
+    text: "Best massage experience in Riyadh. Highly recommend!",
     service: "Deep Tissue Massage",
     avatar: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/845cb87f5_image.png?w=400&q=90"
   },
@@ -40,7 +41,7 @@ const reviews = [
     id: 5,
     name: "Kavita R.",
     rating: 5,
-    text: "SERENITY is my go-to place for all beauty needs.",
+    text: "LYA is my go-to place for all beauty needs.",
     service: "Full Package",
     avatar: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/7cf2b68ad_image.png?w=400&q=90"
   },
@@ -87,6 +88,7 @@ const reviews = [
 ];
 
 export default function ReviewWidget() {
+  const { t } = useLanguage();
   const [currentReview, setCurrentReview] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [imageErrors, setImageErrors] = useState({});
@@ -205,9 +207,9 @@ export default function ReviewWidget() {
             <div className="absolute inset-0 rounded-xl border-2 border-[#C8A882]/30 animate-pulse pointer-events-none" />
           </div>
 
-          {/* SERENITY Badge */}
+          {/* LYA Badge */}
           <div className="absolute -top-1 -right-1 bg-[#C8A882] text-white px-2 py-0.5 rounded-full text-xs font-medium shadow-lg">
-            SERENITY
+            {t("brand.name")}
           </div>
         </motion.div>
       )}

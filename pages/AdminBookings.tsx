@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { Appointment } from "@/entities/Appointment";
 import { BookingNotification } from "@/entities/BookingNotification";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const statusColors = {
   pending: "bg-yellow-100 text-yellow-800 border-yellow-200",
@@ -15,6 +16,7 @@ const statusColors = {
 };
 
 export default function AdminBookings() {
+  const { t, language } = useLanguage();
   const [appointments, setAppointments] = useState([]);
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -79,7 +81,7 @@ export default function AdminBookings() {
       console.log(`Appointment ${appointmentId} updated to ${newStatus}`);
     } catch (error) {
       console.error('Failed to update appointment status:', error);
-      alert('Failed to update appointment status. Please try again.');
+      alert(language === 'ar' ? 'فشل تحديث حالة الموعد. الرجاء المحاولة مرة أخرى.' : 'Failed to update appointment status. Please try again.');
     }
   };
 
@@ -156,7 +158,7 @@ export default function AdminBookings() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `serenity_bookings_${new Date().toISOString().split('T')[0]}.csv`;
+    a.download = `lya_bookings_${new Date().toISOString().split('T')[0]}.csv`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -170,8 +172,8 @@ export default function AdminBookings() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center pt-20">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-[#C8A882] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading booking management dashboard...</p>
-          <p className="text-sm text-gray-500 mt-2">Please wait while we fetch your data</p>
+          <p className="text-gray-600">{language === 'ar' ? 'جارٍ تحميل لوحة إدارة الحجوزات...' : 'Loading booking management dashboard...'}</p>
+          <p className="text-sm text-gray-500 mt-2">{language === 'ar' ? 'نرجوا الانتظار أثناء جلب بياناتكم' : 'Please wait while we fetch your data'}</p>
         </div>
       </div>
     );
@@ -184,13 +186,13 @@ export default function AdminBookings() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center pt-20">
         <div className="text-center max-w-md">
           <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
-          <h2 className="text-xl font-bold text-gray-900 mb-2">Error Loading Dashboard</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-2">{language === 'ar' ? 'خطأ في تحميل لوحة الإدارة' : 'Error Loading Dashboard'}</h2>
           <p className="text-gray-600 mb-4">{error}</p>
           <button
             onClick={loadData}
             className="bg-[#C8A882] text-white px-6 py-2 rounded-lg hover:bg-[#FF5C8D] transition-colors"
           >
-            Try Again
+            {language === 'ar' ? 'حاول مرة أخرى' : 'Try Again'}
           </button>
         </div>
       </div>
@@ -209,8 +211,8 @@ export default function AdminBookings() {
               <div className="flex items-center gap-3">
                 <Sparkles className="w-8 h-8 text-[#C8A882]" />
                 <div>
-                  <h1 className="text-3xl font-serif font-bold text-[#0F0F0F]">SERENITY Admin</h1>
-                  <p className="text-gray-600">Booking Management Dashboard</p>
+                  <h1 className="text-3xl font-serif font-bold text-[#0F0F0F]">{language === 'ar' ? 'إدارة LYA للحجوزات' : 'LYA Admin'}</h1>
+                  <p className="text-gray-600">{language === 'ar' ? 'لوحة إدارة الحجوزات' : 'Booking Management Dashboard'}</p>
                 </div>
               </div>
             </div>
@@ -221,17 +223,17 @@ export default function AdminBookings() {
                 className="flex items-center gap-2 text-gray-600 hover:text-[#C8A882] transition-colors"
               >
                 <RefreshCw className="w-5 h-5" />
-                Refresh
+                {language === 'ar' ? 'تحديث' : 'Refresh'}
               </button>
               <div className="text-right">
                 <p className="text-2xl font-bold text-[#C8A882]">{appointments.length}</p>
-                <p className="text-sm text-gray-600">Total Bookings</p>
+                <p className="text-sm text-gray-600">{language === 'ar' ? 'مجموع الحجوزات' : 'Total Bookings'}</p>
               </div>
               <div className="text-right">
                 <p className="text-2xl font-bold text-green-600">
                   {appointments.filter(a => a.status === 'confirmed').length}
                 </p>
-                <p className="text-sm text-gray-600">Confirmed</p>
+                <p className="text-sm text-gray-600">{language === 'ar' ? 'مؤكدة' : 'Confirmed'}</p>
               </div>
             </div>
           </div>
@@ -241,11 +243,11 @@ export default function AdminBookings() {
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* System Status */}
         <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-8">
-          <h4 className="font-bold text-green-800 mb-2">✅ System Status</h4>
-          <p className="text-sm text-green-700">Dashboard loaded successfully</p>
-          <p className="text-sm text-green-700">Total appointments: {appointments.length}</p>
-          <p className="text-sm text-green-700">Filtered appointments: {filteredAppointments.length}</p>
-          <p className="text-sm text-green-700">Notifications: {notifications.length}</p>
+          <h4 className="font-bold text-green-800 mb-2">✅ {language === 'ar' ? 'حالة النظام' : 'System Status'}</h4>
+          <p className="text-sm text-green-700">{language === 'ar' ? 'تم تحميل لوحة الإدارة بنجاح' : 'Dashboard loaded successfully'}</p>
+          <p className="text-sm text-green-700">{language === 'ar' ? 'مجموع المواعيد:' : 'Total appointments:'} {appointments.length}</p>
+          <p className="text-sm text-green-700">{language === 'ar' ? 'المواعيد المفلترة:' : 'Filtered appointments:'} {filteredAppointments.length}</p>
+          <p className="text-sm text-green-700">{language === 'ar' ? 'الإشعارات:' : 'Notifications:'} {notifications.length}</p>
         </div>
 
         {/* Filters and Controls */}
@@ -257,7 +259,7 @@ export default function AdminBookings() {
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="text"
-                  placeholder="Search by name, email, phone, or service..."
+                  placeholder={language === 'ar' ? 'ابحث بالاسم، البريد، الهاتف، أو الخدمة...' : 'Search by name, email, phone, or service...'}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-[#C8A882] transition-colors"
@@ -270,11 +272,11 @@ export default function AdminBookings() {
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-[#C8A882] transition-colors"
               >
-                <option value="all">All Status</option>
-                <option value="pending">Pending</option>
-                <option value="confirmed">Confirmed</option>
-                <option value="completed">Completed</option>
-                <option value="cancelled">Cancelled</option>
+                <option value="all">{language === 'ar' ? 'جميع الحالات' : 'All Status'}</option>
+                <option value="pending">{language === 'ar' ? 'معلق' : 'Pending'}</option>
+                <option value="confirmed">{language === 'ar' ? 'مؤكد' : 'Confirmed'}</option>
+                <option value="completed">{language === 'ar' ? 'مكتمل' : 'Completed'}</option>
+                <option value="cancelled">{language === 'ar' ? 'ملغى' : 'Cancelled'}</option>
               </select>
 
               {/* Date Filter */}
@@ -292,7 +294,7 @@ export default function AdminBookings() {
               className="flex items-center gap-2 bg-[#C8A882] text-white px-6 py-3 rounded-xl font-medium hover:bg-[#FF5C8D] transition-colors duration-300"
             >
               <Download className="w-5 h-5" />
-              Export CSV
+              {language === 'ar' ? 'تصدير CSV' : 'Export CSV'}
             </button>
           </div>
         </div>
@@ -303,7 +305,7 @@ export default function AdminBookings() {
             <div className="flex items-center gap-3 mb-4">
               <AlertCircle className="w-6 h-6 text-orange-600" />
               <h3 className="font-bold text-orange-800">
-                {notifications.filter(n => n.notification_status === 'pending').length} New Booking Notifications
+                {notifications.filter(n => n.notification_status === 'pending').length} {language === 'ar' ? 'إشعارات حجز جديدة' : 'New Booking Notifications'}
               </h3>
             </div>
             <div className="space-y-2">
@@ -311,16 +313,16 @@ export default function AdminBookings() {
                 <div key={notification.id} className="flex items-center justify-between bg-white rounded-lg p-3">
                   <div>
                     <span className="font-medium">{notification.client_name}</span>
-                    <span className="text-gray-600 ml-2">booked {notification.service_name}</span>
+                    <span className="text-gray-600 ml-2">{language === 'ar' ? 'حجز' : 'booked'} {notification.service_name}</span>
                     <span className="text-sm text-gray-500 ml-2">
-                      on {formatDate(notification.appointment_date)} at {notification.appointment_time}
+                      {language === 'ar' ? 'في' : 'on'} {formatDate(notification.appointment_date)} {language === 'ar' ? 'الساعة' : 'at'} {notification.appointment_time}
                     </span>
                   </div>
                   <button
                     onClick={() => markNotificationAsViewed(notification.id)}
                     className="text-sm bg-[#C8A882] text-white px-3 py-1 rounded-lg hover:bg-[#FF5C8D] transition-colors"
                   >
-                    Mark Viewed
+                    {language === 'ar' ? 'تعييم كمشاهد' : 'Mark Viewed'}
                   </button>
                 </div>
               ))}
@@ -334,12 +336,14 @@ export default function AdminBookings() {
             <div className="bg-white rounded-2xl shadow-sm p-12 text-center">
               <Calendar className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                {appointments.length === 0 ? 'No appointments yet' : 'No appointments match your filters'}
+                {appointments.length === 0
+                  ? (language === 'ar' ? 'لا توجد مواعيد بعد' : 'No appointments yet')
+                  : (language === 'ar' ? 'لا توجد مواعيد تطابق فلاترك' : 'No appointments match your filters')}
               </h3>
               <p className="text-gray-600">
-                {appointments.length === 0 
-                  ? 'Appointments will appear here once customers start booking.'
-                  : 'Try adjusting your filters or search terms.'
+                {appointments.length === 0
+                  ? (language === 'ar' ? 'ستظهر المواعيد هنا عندما يبدأ العملاء بحجز مواعيدهم.' : 'Appointments will appear here once customers start booking.')
+                  : (language === 'ar' ? 'جرّب تعديل الفلاتر أو مصطلحات البحث.' : 'Try adjusting your filters or search terms.')
                 }
               </p>
               {appointments.length === 0 && (
@@ -347,7 +351,7 @@ export default function AdminBookings() {
                   onClick={() => window.dispatchEvent(new CustomEvent('open-booking-modal'))}
                   className="mt-4 bg-[#C8A882] text-white px-6 py-2 rounded-lg hover:bg-[#FF5C8D] transition-colors"
                 >
-                  Test Booking System
+                  {language === 'ar' ? 'اختبار نظام الحجز' : 'Test Booking System'}
                 </button>
               )}
             </div>
@@ -408,7 +412,7 @@ export default function AdminBookings() {
                       <div>
                         <p className="font-medium text-[#0F0F0F]">{appointment.service || 'N/A'}</p>
                         <p className="text-sm text-gray-600">
-                          {appointment.service_price ? `₹${appointment.service_price.toLocaleString('en-IN')}` : 'Price N/A'}
+                          {appointment.service_price ? `SAR ${appointment.service_price.toLocaleString()}` : (language === 'ar' ? 'السعر غير متوفر' : 'Price N/A')}
                         </p>
                       </div>
                     </div>
@@ -417,7 +421,7 @@ export default function AdminBookings() {
                       <Calendar className="w-4 h-4 text-blue-600" />
                       <div>
                         <p className="font-medium text-[#0F0F0F]">{formatDate(appointment.preferred_date)}</p>
-                        <p className="text-sm text-gray-600">Appointment Date</p>
+                        <p className="text-sm text-gray-600">{language === 'ar' ? 'تاريخ الموعد' : 'Appointment Date'}</p>
                       </div>
                     </div>
                     
@@ -425,7 +429,7 @@ export default function AdminBookings() {
                       <Clock className="w-4 h-4 text-green-600" />
                       <div>
                         <p className="font-medium text-[#0F0F0F]">{appointment.preferred_time || 'N/A'}</p>
-                        <p className="text-sm text-gray-600">{appointment.duration || 'Duration N/A'}</p>
+                        <p className="text-sm text-gray-600">{appointment.duration || (language === 'ar' ? 'مدة غير متوفرة' : 'Duration N/A')}</p>
                       </div>
                     </div>
                     
@@ -433,7 +437,7 @@ export default function AdminBookings() {
                       <AlertCircle className="w-4 h-4 text-gray-400" />
                       <div>
                         <p className="font-medium text-[#0F0F0F]">{formatDateTime(appointment.created_date)}</p>
-                        <p className="text-sm text-gray-600">Booked On</p>
+                        <p className="text-sm text-gray-600">{language === 'ar' ? 'تم الحجز في' : 'Booked On'}</p>
                       </div>
                     </div>
                   </div>
@@ -443,7 +447,7 @@ export default function AdminBookings() {
                       <div className="flex items-start gap-2">
                         <MessageSquare className="w-4 h-4 text-gray-400 mt-0.5" />
                         <div>
-                          <p className="text-sm font-medium text-gray-700 mb-1">Special Requests:</p>
+                          <p className="text-sm font-medium text-gray-700 mb-1">{language === 'ar' ? 'طلبات خاصة:' : 'Special Requests:'}</p>
                           <p className="text-sm text-gray-600">{appointment.message}</p>
                         </div>
                       </div>
@@ -452,7 +456,7 @@ export default function AdminBookings() {
 
                   <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                     <div className="text-sm text-gray-500">
-                      Last updated: {formatDateTime(appointment.updated_date)}
+                      {language === 'ar' ? 'آخر تحديث:' : 'Last updated:'} {formatDateTime(appointment.updated_date)}
                     </div>
                     
                     <div className="flex items-center gap-2">
@@ -463,14 +467,14 @@ export default function AdminBookings() {
                             className="flex items-center gap-1 bg-green-600 text-white px-3 py-1 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors"
                           >
                             <CheckCircle className="w-4 h-4" />
-                            Confirm
+                            {language === 'ar' ? 'تأكيد' : 'Confirm'}
                           </button>
                           <button
                             onClick={() => updateAppointmentStatus(appointment.id, 'cancelled')}
                             className="flex items-center gap-1 bg-red-600 text-white px-3 py-1 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
                           >
                             <XCircle className="w-4 h-4" />
-                            Cancel
+                            {language === 'ar' ? 'إلغاء' : 'Cancel'}
                           </button>
                         </>
                       )}
@@ -481,7 +485,7 @@ export default function AdminBookings() {
                           className="flex items-center gap-1 bg-blue-600 text-white px-3 py-1 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
                         >
                           <CheckCircle className="w-4 h-4" />
-                          Mark Complete
+                          {language === 'ar' ? 'تحديد كمكتمل' : 'Mark Complete'}
                         </button>
                       )}
                     </div>
@@ -501,7 +505,7 @@ export default function AdminBookings() {
             <p className="text-2xl font-bold text-blue-600">
               {appointments.filter(a => a.status === 'pending').length}
             </p>
-            <p className="text-sm text-gray-600">Pending Approval</p>
+            <p className="text-sm text-gray-600">{language === 'ar' ? 'معلق للموافقة' : 'Pending Approval'}</p>
           </div>
           
           <div className="bg-white rounded-2xl p-6 text-center shadow-sm">
@@ -511,7 +515,7 @@ export default function AdminBookings() {
             <p className="text-2xl font-bold text-green-600">
               {appointments.filter(a => a.status === 'confirmed').length}
             </p>
-            <p className="text-sm text-gray-600">Confirmed</p>
+            <p className="text-sm text-gray-600">{language === 'ar' ? 'مؤكد' : 'Confirmed'}</p>
           </div>
           
           <div className="bg-white rounded-2xl p-6 text-center shadow-sm">
@@ -521,7 +525,7 @@ export default function AdminBookings() {
             <p className="text-2xl font-bold text-purple-600">
               {appointments.filter(a => a.status === 'completed').length}
             </p>
-            <p className="text-sm text-gray-600">Completed</p>
+            <p className="text-sm text-gray-600">{language === 'ar' ? 'مكتمل' : 'Completed'}</p>
           </div>
           
           <div className="bg-white rounded-2xl p-6 text-center shadow-sm">
@@ -529,9 +533,9 @@ export default function AdminBookings() {
               <MapPin className="w-6 h-6 text-[#C8A882]" />
             </div>
             <p className="text-2xl font-bold text-[#C8A882]">
-              ₹{appointments.reduce((sum, apt) => sum + (apt.service_price || 0), 0).toLocaleString('en-IN')}
+              SAR {appointments.reduce((sum, apt) => sum + (apt.service_price || 0), 0).toLocaleString('en-US')}
             </p>
-            <p className="text-sm text-gray-600">Total Revenue</p>
+            <p className="text-sm text-gray-600">{language === 'ar' ? 'إجمالي الإيرادات' : 'Total Revenue'}</p>
           </div>
         </div>
       </div>

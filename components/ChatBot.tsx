@@ -4,13 +4,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Sparkles, Bot, User } from "lucide-react";
 import { Appointment } from "@/entities/Appointment";
 import { InvokeLLM } from "@/integrations/Core";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ChatBot() {
+  const { t, language } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "Hello! I'm Serenity, your AI assistant at SERENITY Spa & Salon. I can help you with:\n\n🔹 Book appointments for any of our 42+ services\n🔹 Check service prices and details\n🔹 Find your existing bookings\n🔹 Get directions and contact info\n🔹 Learn about our organic treatments\n🔹 Answer wellness questions\n\nHow can I assist you today?",
+      text: language === "ar"
+      ? "مرحبًا! أنا مساعدك الذكي في LYA للسبا والصالون الفاخرة. أستطيع مساعدتك في الحجز والخدمات والأسعار والاتصال وغيرها."
+      : "Hello! I'm your AI assistant at LYA Spa & Salon. I can help you with bookings, services, pricing, contact details, and more.",
       sender: "bot",
       timestamp: new Date()
     }
@@ -28,120 +32,39 @@ export default function ChatBot() {
   }, [messages]);
 
   const getSystemPrompt = async () => {
-    // Get current appointments for context
     const recentAppointments = await Appointment.list("-created_date", 50);
-    
-    return `You are Serenity, an AI assistant for SERENITY Spa & Salon,  's premier luxury wellness destination specializing in organic spa treatments. You are friendly, professional, knowledgeable about wellness and beauty, and always helpful.
 
-SERENITY Spa & Salon Information:
-- Location: P-145, Sector A, Metropolitan Co-Operative Housing Society Limited,  ,  , West Bengal 700105
-- Phone: +91 98765 43210
-- Email: info@serenitysalon.in, serenitybycece@gmail.com
-- Hours: 
-  * Monday-Friday: 10:00 AM - 8:00 PM
-  * Saturday: 9:00 AM - 7:00 PM  
-  * Sunday: 10:00 AM - 6:00 PM
-- Specializes in: 100% organic, chemical-free treatments using state-of-the-art equipment and highly skilled professionals
+    const promptEn = `You are LYA Assistant, an AI assistant for LYA Spa & Salon in Riyadh. You are friendly, professional, and helpful.
 
-COMPLETE & UPDATED SERVICES MENU:
+LYA Spa & Salon Information:
+- Location: Riyadh, Saudi Arabia
+- Phone: +966 55 000 0000
+- Email: info@lya.sa
+- Hours: Monday-Thursday 10:00 AM - 8:00 PM, Friday 4:00 PM - 8:00 PM, Saturday 9:00 AM - 7:00 PM
+- Specializes in: premium spa, salon, wellness, and organic-style treatments
 
-NAILS PRICE LIST:
-- Gel polish: ₹500
-- Soft Gel Extension: ₹1500
-- Acrylic Extension: ₹1800
-- Douyin Nail Extension: ₹2500 (starting)
-- Nail Art Add-Ons: French Tip (+₹500), Ombré (+₹500), Chrome (+₹400), Custom Art (from ₹200)
-- Gel Remove: ₹200
-- Classic Care Manicure: ₹700
-- Royal Korean Ritual Manicure: ₹1500
-- Classic Care Pedicure: ₹1000
-- Royal Korean Ritual Pedicure: ₹2000
-- Royal Korean Ritual Duo (Mani + Pedi): ₹3000
-
-LASH EXTENSION PRICE LIST:
-- Classic Lash Extension: ₹2000
-- Hybrid Lash Extension: ₹2200
-- Wispy Lash Extension: ₹2200
-- Volume Lashes: ₹2500
-- Lash Lift: ₹1500
-
-PERMANENT MAKEUP PRICE LIST:
-- Microblading: ₹6000
-- Microshading: ₹6000
-- Combine Brows: ₹7000
-- Brow Touch up: ₹4500
-- Lip Neutralisation / Lip Blush: ₹5000
-- Lip Touch up: ₹2500
-- Permanent Eyeliner (Upper OR Lower): ₹5000
-- Eyeliner Touch up (single): ₹2500
-- Permanent Eyeliner (Upper & Lower): ₹9000
-- Eyeliner Touch up (upper & lower): ₹4500
-
-SKIN TREATMENTS:
-- Hydra Facial: ₹2000
-- Stayve Korean BBGlow: ₹2500
-- Hydra & BBGlow Combo: ₹4000
-- Cece’s Signature Facial: ₹3000
-
-MASSAGE THERAPY:
-- Swedish Massage: ₹2,500 (60 min)
-- Japanese Head Spa: ₹3,500 (90 min)
-- Thai Dry Massage: ₹3,000 (75 min)
-- Foot Massage: ₹1,500 (45 min)
-- Head and Shoulder Massage: ₹1,200 (30 min)
-- Deep Tissue Massage: ₹3,500 (60 min)
-
-LASER HAIR REMOVAL:
-- Underarm Laser: ₹1,000 (30 min)
-- Bikini Laser: ₹2,000 (45 min)
-- Full Leg Laser: ₹2,000 (90 min)
-- Half Leg Laser: ₹1,500 (60 min)
-- Full Arm Laser: ₹1,500 (60 min)
-- Full Face Laser: ₹1,500 (45 min)
-- Full Body Laser: ₹12,999 (240 min)
-...and more. Refer to main list for others like back, stomach, etc.
-
-HAIR SERVICES:
-- Women Hair Cut: ₹800 (60 min)
-- Men Hair Cut: ₹500 (45 min)
-- Hair Wash & Style: ₹700 (60 min)
-- Hair Spa: ₹1,500 starting (90 min)
-- Keratin Treatment: ₹3,000 starting (240 min)
-- Hair Colouring: ₹3,500 starting (180 min)
-- Hair Straightening: ₹3,000 starting (240 min)
-...and more.
-
-Recent Appointments Context (for reference when clients ask about existing bookings):
+Recent Appointments Context:
 ${recentAppointments.map(apt => `- ${apt.client_name} (${apt.email}, ${apt.phone}): ${apt.service} on ${apt.preferred_date} at ${apt.preferred_time} - Status: ${apt.status}`).join('\n')}
 
-Your capabilities:
-1. Help clients choose the right service based on their needs using the updated price list.
-2. Provide detailed information about treatments, benefits, and pricing.
-3. Guide clients through booking process (explain they'll need to use the booking form for final confirmation).
-4. Help clients find their existing appointments using email or phone number.
-5. Answer questions about organic treatments, spa policies, and wellness advice.
-6. Provide directions and contact information
-7. Explain the benefits of organic vs chemical treatments
-8. Recommend service combinations for optimal results
-9. Discuss aftercare and maintenance for treatments
-
-Guidelines:
-- Always use the NEW prices. Be very precise.
-- For combo pricing (e.g., Gel polish with manicure), calculate it for the user (e.g., "A Classic Care Manicure is ₹700 and adding Gel Polish for ₹500 would make it a total of ₹1200.").
-- Always be warm, professional, and spa-like in tone.
-- Use emojis sparingly but effectively (✨, 🌿, 💆‍♀️, etc.).
-- Promote the spa's organic, chemical-free philosophy.
-- If you can't find specific information, suggest they call +91 98765 43210.
-- If someone wants to book, guide them step-by-step but explain they'll need to use the booking form for final confirmation
-- For existing appointment queries, search by email or phone number in the recent appointments
-- Always mention that we're located in   when relevant
-- Suggest service combinations when appropriate (e.g., Hair Spa + Hair Cut, Manicure + Pedicure)
-- Explain the benefits of regular treatments for best results
-
 Current date: ${new Date().toISOString().split('T')[0]}
-Current time: ${new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/ ' })}
+Current time: ${new Date().toLocaleTimeString('en-SA', { timeZone: 'Asia/Riyadh' })}`;
 
-Remember: You represent a luxury spa brand, so maintain that premium, caring, and knowledgeable tone throughout all interactions.`;
+    const promptAr = `أنت مساعد ذكي لـ LYA للسبا والصالون الفاخرة، وجهة الاسترخاء الفاخرة الأولى في الرياض المتخصصة في علاجات السبا الفاخرة. أنت ودود، احترافي، مطلع على العناية والجمال، ومساعد دائمًا.
+
+معلومات LYA للسبا والصالون:
+- الموقع: الرياض، المملكة العربية السعودية
+- الهاتف: +966 55 000 0000
+- البريد الإلكتروني: info@lya.sa
+- ساعات العمل: الاثنين - الخميس 10:00 صباحًا - 8:00 مساءً، الجمعة 4:00 مساءً - 8:00 مساءً، السبت 9:00 صباحًا - 7:00 مساءً
+- التخصص: سبا، صالون، استرخاء، وعلاجات فاخرة
+
+سياق المواعيد الأخيرة:
+${recentAppointments.map(apt => `- ${apt.client_name} (${apt.email}, ${apt.phone}): ${apt.service} في ${apt.preferred_date} الساعة ${apt.preferred_time} - الحالة: ${apt.status}`).join('\n')}
+
+التاريخ الحالي: ${new Date().toISOString().split('T')[0]}
+الوقت الحالي: ${new Date().toLocaleTimeString('en-SA', { timeZone: 'Asia/Riyadh' })}`;
+
+    return language === "ar" ? promptAr : promptEn;
   };
 
   const handleSendMessage = async () => {
@@ -166,7 +89,7 @@ Remember: You represent a luxury spa brand, so maintain that premium, caring, an
 
 User message: ${inputText}
 
-Please respond as Serenity, the AI assistant for SERENITY Spa & Salon. Be helpful, friendly, professional, and provide accurate information about services, appointments, and spa-related topics. Format your response nicely with line breaks where appropriate for better readability.`,
+Please respond as a helpful LYA assistant. Be helpful, friendly, professional, and provide accurate information about services, appointments, and spa-related topics. Format your response nicely with line breaks where appropriate for better readability.`,
         add_context_from_internet: false
       });
 
@@ -182,7 +105,9 @@ Please respond as Serenity, the AI assistant for SERENITY Spa & Salon. Be helpfu
       console.error('Chat error:', error);
       const errorMessage = {
         id: Date.now() + 1,
-        text: "I apologize, but I'm experiencing technical difficulties. Please call us directly at +91 98765 43210 or visit our contact page for assistance. Our team will be happy to help you! ✨",
+        text: language === 'ar'
+        ? 'نعتذر، نواجه مشكلة تقنية. يمكنك الاتصال بنا مباشرة على +966 55 000 0000 أو زيارة صفحة الاتصال.'
+        : 'I apologize, but I am experiencing technical difficulties. Please call us directly at +966 55 000 0000 or visit our contact page for help.',
         sender: "bot",
         timestamp: new Date()
       };
@@ -235,8 +160,8 @@ Please respond as Serenity, the AI assistant for SERENITY Spa & Salon. Be helpfu
                   <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-400 rounded-full border-2 border-white"></div>
                 </div>
                 <div>
-                  <h3 className="font-serif text-lg font-bold">Serenity AI</h3>
-                  <p className="text-xs opacity-90">SERENITY Spa Assistant • Online</p>
+                  <h3 className="font-serif text-lg font-bold">{language === 'ar' ? 'مساعد LYA' : 'LYA Assistant'}</h3>
+                  <p className="text-xs opacity-90">{language === 'ar' ? 'مساعد افتراضي آني • متصل' : 'AI Assistant • Online'}</p>
                 </div>
               </div>
               <button
@@ -305,22 +230,22 @@ Please respond as Serenity, the AI assistant for SERENITY Spa & Salon. Be helpfu
             <div className="px-4 py-2 border-t border-gray-200 bg-gray-50">
               <div className="flex gap-2 mb-2 overflow-x-auto">
                 <button
-                  onClick={() => setInputText("I want to book an appointment")}
+                  onClick={() => setInputText(language === 'ar' ? 'أريد حجز موعد' : 'I want to book an appointment')}
                   className="px-3 py-1 bg-[#C8A882] text-white text-xs rounded-full whitespace-nowrap hover:bg-[#FF5C8D] transition-colors"
                 >
-                  📅 Book Now
+                  📅 {language === 'ar' ? 'احجز الآن' : 'Book Now'}
                 </button>
                 <button
-                  onClick={() => setInputText("Show me your services and prices")}
+                  onClick={() => setInputText(language === 'ar' ? 'أريد رؤية أسعاركم' : 'Show me your services and prices')}
                   className="px-3 py-1 bg-[#C8A882] text-white text-xs rounded-full whitespace-nowrap hover:bg-[#FF5C8D] transition-colors"
                 >
-                  💰 Prices
+                  💰 {language === 'ar' ? 'الأسعار' : 'Prices'}
                 </button>
                 <button
-                  onClick={() => setInputText("Where are you located?")}
+                  onClick={() => setInputText(language === 'ar' ? 'أين تواجدون؟' : 'Where are you located?')}
                   className="px-3 py-1 bg-[#C8A882] text-white text-xs rounded-full whitespace-nowrap hover:bg-[#FF5C8D] transition-colors"
                 >
-                  📍 Location
+                  📍 {language === 'ar' ? 'الموقع' : 'Location'}
                 </button>
               </div>
             </div>
@@ -333,7 +258,7 @@ Please respond as Serenity, the AI assistant for SERENITY Spa & Salon. Be helpfu
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder="Ask about services, booking, prices..."
+                  placeholder={language === 'ar' ? 'اسألي عن الخدمات، الحجز، الأسعار...' : 'Ask about services, booking, prices...'}
                   className="flex-1 px-4 py-2 border border-gray-200 rounded-full focus:outline-none focus:border-[#C8A882] transition-colors"
                   disabled={isTyping}
                 />
