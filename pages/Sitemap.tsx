@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { Sparkles, Home, Scissors, ArrowRight, ArrowLeft } from "lucide-react";
+import { Flower, Home, Scissors, ArrowRight, ArrowLeft } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const sitePages = [
@@ -122,7 +122,7 @@ export default function Sitemap() {
           className="text-center mb-16"
         >
           <div className="inline-flex items-center gap-2 bg-[#C8A882]/10 rounded-full px-4 py-2 mb-6">
-            <Sparkles className="w-4 h-4 text-[#C8A882]" />
+            <Flower className="w-4 h-4 text-[#C8A882]" />
             <span className="text-sm font-medium">{localized.navTitle}</span>
           </div>
 

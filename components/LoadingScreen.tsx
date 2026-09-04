@@ -386,7 +386,7 @@ const AnimatedFlower = () => (
       }}
     />
 
-    {/* Floating Sparkles */}
+    {/* Floating Flowers */}
     <motion.circle
       cx="25"
       cy="25"

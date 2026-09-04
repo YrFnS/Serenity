@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail, Clock, Instagram, Facebook, Sparkles } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Instagram, Facebook, Flower } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Contact() {
@@ -15,7 +15,7 @@ export default function Contact() {
           className="text-center mb-16"
         >
           <div className="inline-flex items-center gap-2 bg-[#C8A882]/10 rounded-full px-4 py-2 mb-6">
-            <Sparkles className="w-4 h-4 text-[#C8A882]" />
+            <Flower className="w-4 h-4 text-[#C8A882]" />
             <span className="text-sm font-medium">{t("contact.pill")}</span>
           </div>
           
@@ -91,7 +91,7 @@ export default function Contact() {
                   <Instagram className="w-6 h-6" />
                 </a>
                 <a href="https://www.fresha.com/en-GB/a/lya-spa-salon-riyadh-abdallah-ibn-soleiman-al-hamdani-a7n7o4mk" target="_blank" rel="noreferrer" className="w-12 h-12 bg-[#C8A882] rounded-2xl flex items-center justify-center hover:bg-[#FF5C8D] transition-colors duration-300 text-white">
-                  <Sparkles className="w-6 h-6" />
+                  <Flower className="w-6 h-6" />
                 </a>
               </div>
             </div>

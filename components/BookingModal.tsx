@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Calendar, Clock, User, Mail, Phone, MessageSquare, Sparkles, Check, Download, Camera } from "lucide-react";
+import { X, Calendar, Clock, User, Mail, Phone, MessageSquare, Flower, Check, Download, Camera } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Appointment } from "@/entities/Appointment";
 import { BookingNotification } from "@/entities/BookingNotification";
@@ -327,7 +327,7 @@ ${t("booking.confirmation.separator")}
           >
             <div className="sticky top-0 bg-white rounded-t-3xl border-b border-gray-100 p-6 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <Sparkles className="w-6 h-6 text-[#C8A882]" />
+                <Flower className="w-6 h-6 text-[#C8A882]" />
                 <h2 className="font-serif text-2xl font-bold text-[#0F0F0F]">
                   {t("booking.title")}
                 </h2>

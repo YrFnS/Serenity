@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { 
   Calendar, Clock, User, Mail, Phone, MessageSquare, CheckCircle, XCircle, Search, Download,
-  AlertCircle, Star, MapPin, Sparkles, RefreshCw
+  AlertCircle, Star, MapPin, Flower, RefreshCw
 } from "lucide-react";
 import { Appointment } from "@/entities/Appointment";
 import { BookingNotification } from "@/entities/BookingNotification";
@@ -209,7 +209,7 @@ export default function AdminBookings() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-3">
-                <Sparkles className="w-8 h-8 text-[#C8A882]" />
+                <Flower className="w-8 h-8 text-[#C8A882]" />
                 <div>
                   <h1 className="text-3xl font-serif font-bold text-[#0F0F0F]">{language === 'ar' ? 'إدارة LYA للحجوزات' : 'LYA Admin'}</h1>
                   <p className="text-gray-600">{language === 'ar' ? 'لوحة إدارة الحجوزات' : 'Booking Management Dashboard'}</p>

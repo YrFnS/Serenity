@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { Flower, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const galleryImages = [
@@ -48,7 +48,7 @@ export default function Gallery() {
           className="text-center mb-16"
         >
           <div className="inline-flex items-center gap-2 bg-[#C8A882]/10 rounded-full px-4 py-2 mb-6">
-            <Sparkles className="w-4 h-4 text-[#C8A882]" />
+            <Flower className="w-4 h-4 text-[#C8A882]" />
             <span className="text-sm font-medium">{t("gallery.pill")}</span>
           </div>
           

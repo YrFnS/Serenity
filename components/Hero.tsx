@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, ArrowRight, MapPin, Users, Award } from "lucide-react";
+import { ArrowRight, MapPin, Users, Award } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Hero() {

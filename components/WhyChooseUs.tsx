@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Leaf, Award, Gift, Sparkles } from "lucide-react";
+import { Leaf, Award, Gift, Flower } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function WhyChooseUs() {
@@ -58,7 +58,7 @@ export default function WhyChooseUs() {
                 viewport={{ once: true }}
                 className="inline-flex items-center gap-2 bg-[#C8A882]/10 rounded-full px-4 py-2 mb-6"
               >
-                <Sparkles className="w-4 h-4 text-[#C8A882]" />
+                <Flower className="w-4 h-4 text-[#C8A882]" />
                 <span className="font-sans text-sm text-[#C8A882] font-medium uppercase tracking-wider">{t('why.pill')}</span>
               </motion.div>
               

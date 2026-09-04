@@ -1,7 +1,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, Sparkles, Bot, User } from "lucide-react";
+import { MessageCircle, X, Send, Flower, Bot, User } from "lucide-react";
 import { Appointment } from "@/entities/Appointment";
 import { InvokeLLM } from "@/integrations/Core";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -138,7 +138,7 @@ Please respond as a helpful LYA assistant. Be helpful, friendly, professional, a
       >
         <MessageCircle className="w-6 h-6" />
         <div className="absolute -top-1 -right-1 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
-          <Sparkles className="w-3 h-3 text-white" />
+          <Flower className="w-3 h-3 text-white" />
         </div>
       </motion.button>
 

@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { Flower, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function PromotionalBanner() {
@@ -32,7 +32,7 @@ export default function PromotionalBanner() {
               top: `${20 + (i % 3) * 25}%`
             }}
           >
-            <Sparkles className="w-6 h-6 text-white/60" />
+            <Flower className="w-6 h-6 text-white/60" />
           </motion.div>
         ))}
       </div>
@@ -112,7 +112,7 @@ export default function PromotionalBanner() {
             className="flex justify-center items-center gap-4 pt-4"
           >
             <div className="w-16 h-0.5 bg-white/30"></div>
-            <Sparkles className="w-6 h-6 text-white/60" />
+            <Flower className="w-6 h-6 text-white/60" />
             <div className="w-16 h-0.5 bg-white/30"></div>
           </motion.div>
         </motion.div>
