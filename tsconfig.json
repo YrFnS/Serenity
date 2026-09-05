@@ -13,10 +13,11 @@
     "strict": false,
     "jsx": "react-jsx",
     "baseUrl": ".",
+    "types": ["node", "vite/client"],
     "paths": {
       "@/*": ["./*"]
     }
   },
-  "include": ["src", "components", "pages", "entities", "Layout.tsx", "utils.ts", "integrations", "vite.config.ts", ],
+  "include": ["src", "components", "pages", "entities", "Layout.tsx", "utils.ts", "integrations", "vite.config.ts"],
   "references": []
 }
